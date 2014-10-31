@@ -21,5 +21,4 @@ build do
     :env => env)
   command "make -j #{workers}", :env => {"LD_RUN_PATH" => "#{install_dir}/embedded/lib"}
   command "sudo make install"
-  command "sudo chown -R vagrant #{install_dir}"
 end

@@ -33,12 +33,20 @@ env = {
   "LDFLAGS" => "-Wl,-rpath,#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib"
 }
 
+python_configure = ["./configure",
+                    "--enable-universalsdk=/"
+                    "--prefix=#{install_dir}/embedded",
+                    "--enable-shared",
+                    "--with-dbmliborder="].join(" ")
+
+if ENV['PKG_TYPE'] == 'dmg'
+  python_configure += ' --enable-ipv6 --with-universal-archs=intel'
+end
+
 build do
   license "PSFL"
-  command ["./configure",
-           "--prefix=#{install_dir}/embedded",
-           "--enable-shared",
-           "--with-dbmliborder="].join(" "), :env => env
+  command python_configure, :env => env
+  patch :source => "disable_sslv3.patch" if ENV['PKG_TYPE'] == 'dmg'
   command "make", :env => env
   command "make install", :env => env
   command "rm -rf #{install_dir}/embedded/lib/python2.7/test"
