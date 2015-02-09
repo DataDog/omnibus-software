@@ -32,7 +32,7 @@ build do
   command "sed -i -e s:-static:: src/Makefile", :cwd => working_dir
 
   # build it
-  command "make", :cwd => "#{working_dir}/src"
+  command "make -j #{workers}", :cwd => "#{working_dir}/src"
   command "make check", :cwd => "#{working_dir}/src"
 
   # move it

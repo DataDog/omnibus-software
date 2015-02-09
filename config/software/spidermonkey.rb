@@ -36,14 +36,14 @@ working_dir = "#{project_dir}/src"
 #
 
 build do
-  command(["make",
+  command(["make -j #{workers}",
            "BUILD_OPT=1",
            "XCFLAGS=-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
            "-f",
            "Makefile.ref"].join(" "),
           :env => env,
           :cwd => working_dir)
-  command(["make",
+  command(["make -j #{workers}",
            "BUILD_OPT=1",
            "JS_DIST=#{install_dir}/embedded",
            "-f",

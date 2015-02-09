@@ -40,6 +40,6 @@ build do
   else
     command "./configure --prefix=/tmp/build/embedded", :env => env
   end
-  command "make", :env => env
+  command "make -j #{workers}", :env => env
   command "make install", :env => env
 end
