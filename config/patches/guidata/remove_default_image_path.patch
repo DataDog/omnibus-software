@@ -1,0 +1,10 @@
+--- guidata-1.6.1/guidata/config.py	2013-05-13 10:41:22.000000000 -0400
++++ guidata-1.6.1/guidata/config.py.new	2015-02-24 16:30:00.000000000 -0500
+@@ -16,7 +16,6 @@
+ from guidata.userconfig import UserConfig
+ 
+ APP_PATH = osp.dirname(__file__)
+-add_image_module_path("guidata", "images")
+ _ = get_translation("guidata")
+ 
+ DEFAULTS = {'arrayeditor':
