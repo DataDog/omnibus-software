@@ -34,14 +34,14 @@ env = {
 }
 
 build do
-  license "PSFL"
+  ship_license "PSFL"
   command ["./configure",
            "--prefix=#{install_dir}/embedded",
            "--enable-shared",
            "--with-dbmliborder="].join(" "), :env => env
   command "make", :env => env
   command "make install", :env => env
-  command "rm -rf #{install_dir}/embedded/lib/python2.7/test"
+  delete "#{install_dir}/embedded/lib/python2.7/test"
 
   # There exists no configure flag to tell Python to not compile readline support :(
   block do
