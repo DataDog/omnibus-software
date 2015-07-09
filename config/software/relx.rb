@@ -38,6 +38,6 @@ env = {
 }
 
 build do
-  command "make", :env => env
+  command "make -j #{workers}", :env => env
   command "cp ./relx #{install_dir}/embedded/bin/"
 end
