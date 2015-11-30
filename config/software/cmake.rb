@@ -1,5 +1,4 @@
 name 'cmake'
-
 default_version '3.1.3'
 
 source :url => "http://www.cmake.org/files/v#{version[0..2]}/cmake-#{version}.tar.gz",
