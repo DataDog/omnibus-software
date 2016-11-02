@@ -23,7 +23,7 @@ build do
 
     # Note: RHEL5 is equipped with gcc4.1 that is not supported by Protobuf (it actually crashes during the build)
     # so we use the official package from PyPI and skip the CPP extension for the time being.
-    if ohai['platform_family'] != 'rhel'
+    if ohai['platform_family'] != 'rhel' && ohai['platform_family'] != 'suse'
         # C++ runtime
         command ["cd .. && ./configure",
                  "--prefix=#{install_dir}/embedded",
