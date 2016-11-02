@@ -1,5 +1,6 @@
 name "protobuf-py"
 default_version "3.1.0"
+rhel_pip_version = "3.1.0.post1"
 
 dependency "python"
 dependency "setuptools"
@@ -20,13 +21,10 @@ end
 build do
     ship_license "https://raw.githubusercontent.com/google/protobuf/3.1.x/LICENSE"
 
-    build_options = ""
-    pip_build_options = ""
-
-    # C++ runtime
     # Note: RHEL5 is equipped with gcc4.1 that is not supported by Protobuf (it actually crashes during the build)
-    # so we skip the CPP extension for the time being.
+    # so we use the official package from PyPI and skip the CPP extension for the time being.
     if ohai['platform_family'] != 'rhel'
+        # C++ runtime
         command ["cd .. && ./configure",
                  "--prefix=#{install_dir}/embedded",
                  "--enable-static=no",
@@ -38,16 +36,15 @@ build do
         command "cd .. && make -j #{workers}"
         command "cd .. && make install"
 
-        build_options = "--cpp_implementation"
-        pip_build_options = "--install-option=\"#{build_options}\""
+        # Python lib
+        command "#{install_dir}/embedded/bin/python setup.py build --cpp_implementation", :env => env
+        command "#{install_dir}/embedded/bin/python setup.py test --cpp_implementation", :env => env
+        command "#{install_dir}/embedded/bin/pip install . --install-option=\"--cpp_implementation\""
+
+        # We don't need protoc anymore
+        delete "#{install_dir}/embedded/lib/libprotoc.*"
+        delete "#{install_dir}/embedded/bin/protoc"
+    else
+        command "#{install_dir}/embedded/bin/pip install protobuf==#{rhel_pip_version}"
     end
-
-    # Python lib
-    command "#{install_dir}/embedded/bin/python setup.py build #{build_options}", :env => env
-    command "#{install_dir}/embedded/bin/python setup.py test #{build_options}", :env => env
-    command "#{install_dir}/embedded/bin/pip install . #{pip_build_options}"
-
-    # We don't need protoc
-    delete "#{install_dir}/embedded/lib/libprotoc.*"
-    delete "#{install_dir}/embedded/bin/protoc"
 end
