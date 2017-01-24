@@ -28,7 +28,7 @@ if ohai["platform"] == "windows"
          :md5 => "ce2f1224d50f529b6093e3feb0799f09"
 
   build do
-    command "\"#{windows_safe_path(install_dir)}\\embedded\\python.exe\" ez_setup.py "
+    command "\"#{windows_safe_path(install_dir)}\\embedded\\python.exe\" ez_setup.py --version #{version}"
   end
 else
   source :url => "https://github.com/pypa/setuptools/archive/v#{version}.tar.gz",
