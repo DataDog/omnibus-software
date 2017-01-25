@@ -23,7 +23,6 @@ skip_transitive_dependency_licensing true
 dependency "zlib"
 dependency "cacerts"
 dependency "makedepend" unless aix? || windows?
-dependency "openssl-fips" if fips_mode?
 
 default_version "1.0.2j"
 
@@ -70,8 +69,6 @@ build do
     "no-rc5",
     "shared",
   ]
-
-  configure_args += ["--with-fipsdir=#{install_dir}/embedded", "fips"] if fips_mode?
 
   if windows?
     configure_args << "zlib-dynamic"
