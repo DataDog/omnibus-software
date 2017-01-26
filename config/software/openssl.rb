@@ -68,6 +68,7 @@ build do
     "no-mdc2",
     "no-rc5",
     "shared",
+    "no-ssl3",
   ]
 
   if windows?

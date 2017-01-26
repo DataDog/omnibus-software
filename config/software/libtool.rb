@@ -42,8 +42,9 @@ build do
     env["M4"] = "/opt/freeware/bin/m4"
   end
 
+  mkdir "/tmp/build/embedded"
   command "./configure" \
-          " --prefix=#{install_dir}/embedded", env: env
+          " --prefix=/tmp/build/embedded", env: env
 
   make env: env
   make "install", env: env
