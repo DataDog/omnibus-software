@@ -6,5 +6,7 @@ dependency "homebrew"
 
 build do
   command "brew install qt"
-  command "brew linkapps qt"
+  command "brew uninstall qt5 || true"
+  command "brew unlink qt || true"
+  command "brew link qt --force"
 end
