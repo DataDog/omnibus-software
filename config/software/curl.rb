@@ -34,7 +34,7 @@ if ohai["platform"] != "windows"
     end
 
     # curl requires pkg-config that is shipped with the agent
-    env = {"PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"]}
+    env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
     command ["./configure",
              "--prefix=#{install_dir}/embedded",
              "--disable-manual",
