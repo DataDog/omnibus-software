@@ -1,5 +1,5 @@
-name 'py-compiled-cleanup'
-description 'removes all pyc/pyo files from the embedded dir and lists them in a file'
+name "py-compiled-cleanup"
+description "removes all pyc/pyo files from the embedded dir and lists them in a file"
 
 build do
   # Works on Linux only
