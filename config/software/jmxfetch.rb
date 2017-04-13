@@ -2,7 +2,7 @@ name "jmxfetch"
 
 jmx_version = ENV["JMX_VERSION"]
 if jmx_version.nil? || jmx_version.empty?
-  default_version "0.12.0"
+  default_version "0.13.0"
 else
   default_version jmx_version
 end
@@ -11,7 +11,11 @@ version "0.12.0" do
   source md5: "2a04e4f02de90b7bbd94e581afb73c8f"
 end
 
-source :url => "https://yumtesting.datad0g.com/testremi/jmxfetch-#{version}-jar-with-dependencies.jar"
+version "0.13.0" do
+  source sha256: "741a74e8aed6bcfd726399bf0e5094bb622f7a046004a57e3e39e11f53f72aa0"
+end
+
+source :url => "https://dd-jmxfetch.s3.amazonaws.com/jmxfetch-#{version}-jar-with-dependencies.jar"
 
 relative_path "jmxfetch"
 
