@@ -37,11 +37,8 @@ else
     # This is a custom built pycurl
     python_lib_path = File.join(install_dir, "embedded", "Lib", "site-packages")
     command "powershell.exe -Command wget -outfile pycurl.pyd https://s3.amazonaws.com/dd-agent-omnibus/pycurl.pyd"
-    pycurl_sha256 = "47 c6 b1 ca aa 11 a5 a1 cf 39 38 a1 0b f3 2a 21 e8 72 3c 16 ec bb 4a f8 b8 20 87 4d be 29 ba 31"
+    pycurl_sha256 = "f5 b6 9c b1 85 d4 ff dc 75 5d 46 a6 e9 32 80 d5 77 ae b6 06 2f 29 d3 0e 4b d3 08 7c 2b f0 a4 1d"
     command "CertUtil -hashfile pycurl.pyd SHA256 | grep '#{pycurl_sha256}' && mv pycurl.pyd #{python_lib_path}"
 
-    command "powershell.exe -Command wget -outfile msvcr110.dll https://s3.amazonaws.com/dd-agent-omnibus/msvcr110.dll"
-    vcruntime_sha256 = "0c bb d9 69 1f 08 43 4d a3 61 78 74 f9 9c 6d d8 75 38 cb d6 5b 5d 8b c3 9f ce 37 8d 4e d2 9e ed"
-    command "CertUtil -hashfile msvcr110.dll SHA256 | grep '#{vcruntime_sha256}' && mv msvcr110.dll #{python_lib_path}"
   end
 end
