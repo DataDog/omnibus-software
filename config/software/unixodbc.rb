@@ -14,7 +14,7 @@ source :url => "https://downloads.sourceforge.net/unixodbc/unixODBC-#{version}.t
 build do
   ship_license "LGPLv2"
   env = with_standard_compiler_flags(with_embedded_path)
-  
+
   configure_args = [
     "--disable-readline",
     "--prefix=#{install_dir}/embedded",
