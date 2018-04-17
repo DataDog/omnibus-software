@@ -37,6 +37,7 @@ if ohai["platform"] != "windows"
   }
 
   python_configure = ["./configure",
+                      "--enable-unicode=ucs4",
                       "--enable-universalsdk=/",
                       "--prefix=#{install_dir}/embedded"]
 
