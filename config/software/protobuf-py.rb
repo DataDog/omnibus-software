@@ -34,6 +34,9 @@ build do
   # command "cd .. && make check"
   command "cd .. && make -j #{workers}"
 
+  if ohai["platform_family"] == "rhel"
+    patch :source => "setup-py-no-debug-symbols-for-gcc-41.patch", :plevel => 2
+  end
   # Python lib
   command ["#{install_dir}/embedded/bin/python",
          "setup.py",
