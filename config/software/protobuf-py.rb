@@ -1,6 +1,5 @@
 name "protobuf-py"
 default_version "3.5.1"
-rhel_pip_version = "3.5.1"
 
 dependency "python"
 dependency "setuptools"
@@ -22,27 +21,31 @@ if ohai["platform_family"] == "mac_os_x"
 end
 
 build do
-  ship_license "https://raw.githubusercontent.com/google/protobuf/3.1.x/LICENSE"
+  ship_license "https://raw.githubusercontent.com/google/protobuf/3.5.x/LICENSE"
 
-  # C++ runtime
-  command ["cd .. && ./configure",
-              "--prefix=#{install_dir}/embedded",
-              "--without-zlib"].join(" "), :env => env
+  if windows?
+    pip "install protobuf==#{version}"
+  else
+    # C++ runtime
+    command ["cd .. && ./configure",
+                "--prefix=#{install_dir}/embedded",
+                "--without-zlib"].join(" "), :env => env
 
-  # You might want to temporarily uncomment the following line to check build sanity (e.g. when upgrading the
-  # library) but there's no need to perform the check every time.
-  # command "cd .. && make check"
-  command "cd .. && make -j #{workers}"
+    # You might want to temporarily uncomment the following line to check build sanity (e.g. when upgrading the
+    # library) but there's no need to perform the check every time.
+    # command "cd .. && make check"
+    command "cd .. && make -j #{workers}"
 
-  if ohai["platform_family"] == "rhel"
-    patch :source => "setup-py-no-debug-symbols-for-gcc-41.patch", :plevel => 2
+    if ohai["platform_family"] == "rhel"
+      patch :source => "setup-py-no-debug-symbols-for-gcc-41.patch", :plevel => 2
+    end
+    # Python lib
+    command ["#{install_dir}/embedded/bin/python",
+           "setup.py",
+           "build",
+           "--cpp_implementation",
+           "--compile_static_extension"].join(" "), :env => env
+    command "#{install_dir}/embedded/bin/python setup.py test --cpp_implementation", :env => env
+    pip "install . --install-option=\"--cpp_implementation\""
   end
-  # Python lib
-  command ["#{install_dir}/embedded/bin/python",
-         "setup.py",
-         "build",
-         "--cpp_implementation",
-         "--compile_static_extension"].join(" "), :env => env
-  command "#{install_dir}/embedded/bin/python setup.py test --cpp_implementation", :env => env
-  pip "install . --install-option=\"--cpp_implementation\""
 end
