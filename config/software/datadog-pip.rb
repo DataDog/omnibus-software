@@ -3,22 +3,22 @@
 # This product includes software developed at Datadog (https:#www.datadoghq.com/).
 # Copyright 2018 Datadog, Inc.
 
-name 'datadog-pip'
+name "datadog-pip"
 
-dependency 'pip'
+dependency "pip"
 
-source git: 'https://github.com/DataDog/pip.git'
+source git: "https://github.com/DataDog/pip.git"
 
-relative_path 'pip'
+relative_path "pip"
 
-pip_version = ENV['PIP_VERSION']
+pip_version = ENV["PIP_VERSION"]
 if pip_version.nil? || pip_version.empty?
-  pip_version = 'trishankatdatadog/10.0.1.tuf'
+  pip_version = "trishankatdatadog/10.0.1.tuf"
 end
 default_version pip_version
 
 # Phase 1 stuff - unneeded currently
-# substitution_layer_url = 'https://github.com/in-toto/in-toto/archive/add-substitution-layer.zip'
+# substitution_layer_url = "https://github.com/in-toto/in-toto/archive/add-substitution-layer.zip"
 
 build do
   if ohai["platform"] == "windows"
