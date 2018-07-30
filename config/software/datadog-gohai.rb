@@ -1,5 +1,5 @@
 name "datadog-gohai"
-default_version "last-stable"
+default_version "arbll/go1.10"
 
 always_build true
 
