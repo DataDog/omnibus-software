@@ -15,7 +15,7 @@ version "1.0.0" do
 end
 
 if ohai["platform_family"] == "rhel"
-  source :url => "https://s3.amazonaws.com/dd-agent/go-metro/gometro-centos6-#{version}",
+  source :url => "https://s3.amazonaws.com/dd-agent/go-metro/gometro-centos6-#{version}"
 end
 
 #TODO: complete OSX support.
