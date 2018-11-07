@@ -9,6 +9,8 @@ end
 relative_path "krb5-#{version}/src"
 
 build do
+  ship_license "https://raw.githubusercontent.com/krb5/krb5/master/NOTICE"
+
   cmd = ["./configure",
          "--prefix=#{install_dir}/embedded"].join(" ")
   env = {
