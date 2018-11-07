@@ -7,7 +7,7 @@ version "1.16.2" do
 end
 
 
-relative_path "libkrb5-#{version}"
+relative_path "krb5-#{version}/src"
 
 build do
   cmd = ["./configure",
