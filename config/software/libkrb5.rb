@@ -6,7 +6,6 @@ version "1.16.2" do
   source sha256: "9f721e1fe593c219174740c71de514c7228a97d23eb7be7597b2ae14e487f027"
 end
 
-
 relative_path "krb5-#{version}/src"
 
 build do
