@@ -11,7 +11,14 @@ relative_path "krb5-#{version}/src"
 build do
   ship_license "https://raw.githubusercontent.com/krb5/krb5/master/NOTICE"
 
+  patch :source => "aclocal-add-parameter-to-disable-keyutils-detection.patch"
+
+  # after patching we need to recreate configure scripts w/ autoconf
+  autoconf_cmd = ["autoreconf", "--install"].join(" ")
+  command autoconf_cmd
+
   cmd = ["./configure",
+         "--disable-keyutils",
          "--prefix=#{install_dir}/embedded"].join(" ")
   env = {
     "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
