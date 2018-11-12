@@ -13,7 +13,6 @@ relative_path "krb5-#{version}/src"
 
 reconf_env = { "PATH" => "#{install_dir}/embedded/bin:#{ENV["PATH"]}" }
 
-
 build do
 
   ship_license "https://raw.githubusercontent.com/krb5/krb5/master/NOTICE"
@@ -38,6 +37,6 @@ build do
 
   # FIXME: CONDA libs appear to confuse the health checker - manually checked file
   # are properly linked. Must whitelist for build to succeed.
-  whitelist_file "#{install_dir}/embedded/lib/krb5/plugins/tls/k5tls.so" 
-  whitelist_file "#{install_dir}/embedded/lib/krb5/plugins/preauth/pkinit.so" 
+  whitelist_file "#{install_dir}/embedded/lib/krb5/plugins/tls/k5tls.so"
+  whitelist_file "#{install_dir}/embedded/lib/krb5/plugins/preauth/pkinit.so"
 end
