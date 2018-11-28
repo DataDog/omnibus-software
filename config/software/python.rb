@@ -17,6 +17,10 @@
 
 name "python"
 
+
+# If you want to remove the -fPIC just define it to the empty string
+extra_cflags = ENV["PYTHON_EXTRA_CFLAGS"] || "-fPIC"
+
 if ohai["platform"] != "windows"
   default_version "2.7.15"
 
@@ -32,7 +36,7 @@ if ohai["platform"] != "windows"
   relative_path "Python-#{version}"
 
   env = {
-    "CFLAGS" => "-I#{install_dir}/embedded/include -O2 -g -pipe -fPIC",
+    "CFLAGS" => "-I#{install_dir}/embedded/include -O2 -g -pipe #{extra_cflags}",
     "LDFLAGS" => "-Wl,-rpath,#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib",
   }
 
