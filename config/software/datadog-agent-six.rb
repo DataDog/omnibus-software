@@ -1,8 +1,8 @@
 name "datadog-agent-six"
 default_version "0.1.0"
 
-license 'Apache'
-license_file 'LICENSE'
+license "Apache"
+license_file "LICENSE"
 skip_transitive_dependency_licensing true
 
 source :url => "https://github.com/DataDog/datadog-agent-six/archive/v#{version}.tar.gz",
