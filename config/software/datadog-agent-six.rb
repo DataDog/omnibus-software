@@ -1,6 +1,9 @@
 name "datadog-agent-six"
 default_version "0.1.0"
 
+dependency "python2"
+dependency "python3"
+
 license "Apache"
 license_file "LICENSE"
 skip_transitive_dependency_licensing true
@@ -12,7 +15,13 @@ source :url => "https://github.com/DataDog/datadog-agent-six/archive/v#{version}
 relative_path "datadog-agent-six-#{version}"
 
 build do
-  command "cmake -DCMAKE_INSTALL_PREFIX:PATH=#{install_dir}/embedded ."
+  env = {
+    "Python2_ROOT_DIR" => "#{install_dir}/embedded",
+    "Python3_ROOT_DIR" => "#{install_dir}/embedded",
+    "LDFLAGS" => "-Wl,-rpath,#{install_dir}/embedded/lib -L#{install_dir}/embedded/lib"
+  }
+
+  command "cmake -DCMAKE_INSTALL_PREFIX:PATH=#{install_dir}/embedded .", :env => env
   command "make -j #{workers}"
   command "make install"
 end
