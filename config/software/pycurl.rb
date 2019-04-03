@@ -25,6 +25,7 @@ else
   wheel_name = "pycurl-7.43.0.2-cp27-cp27m-win_amd64.whl"
   wheel_md5 = "25277be4928af13ea67a8a7b928e11a2"
 
+  # we use a hand-rolled binary pycurl wheel built against libcurl 7.64.1
   source :url => "https://s3.amazonaws.com/dd-agent-omnibus/#{wheel_name}",
          :md5 => wheel_md5
 
