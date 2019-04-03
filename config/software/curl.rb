@@ -16,14 +16,14 @@
 #
 
 name "curl"
-default_version "7.59.0"
+default_version "7.64.1"
 
 if ohai["platform"] != "windows"
   dependency "zlib"
   dependency "openssl"
   dependency "nghttp2"
   source :url => "https://curl.haxx.se/download/curl-#{version}.tar.gz",
-         :sha256 => "099d9c32dc7b8958ca592597c9fabccdf4c08cfb7c114ff1afbbc4c6f13c9e9e"
+         :sha256 => "432d3f466644b9416bc5b649d344116a753aeaa520c8beaf024a90cba9d3d35d"
 
   relative_path "curl-#{version}"
 
@@ -58,9 +58,11 @@ if ohai["platform"] != "windows"
     command "make install"
   end
 else
+  version "7.59.0" # still needs to be bumped to >7.64.0
+
   # Compiling is hard... let's ship binaries instead : TODO: react according to platform
-  source :url => "https://s3.amazonaws.com/dd-agent-omnibus/curl4-7.43.0.tar.gz",
-         :md5 => "885daa917d96c9d8278bda39a9295f47",
+  source :url => "https://mirrors.kernel.org/sources.redhat.com/cygwin/x86_64/release/curl/libcurl4/libcurl4-#{version}-1.tar.xz",
+         :sha256 => "3381a39ddf7a034b6c23b68863fa868437244c71619ec8e4c357cd45d08ac71d",
          :extract => :seven_zip
 
   relative_path "curl"
