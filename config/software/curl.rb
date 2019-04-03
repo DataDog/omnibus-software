@@ -18,58 +18,41 @@
 name "curl"
 default_version "7.64.1"
 
-if ohai["platform"] != "windows"
-  dependency "zlib"
-  dependency "openssl"
-  dependency "nghttp2"
-  source :url => "https://curl.haxx.se/download/curl-#{version}.tar.gz",
-         :sha256 => "432d3f466644b9416bc5b649d344116a753aeaa520c8beaf024a90cba9d3d35d"
+dependency "zlib"
+dependency "openssl"
+dependency "nghttp2"
+source :url => "https://curl.haxx.se/download/curl-#{version}.tar.gz",
+       :sha256 => "432d3f466644b9416bc5b649d344116a753aeaa520c8beaf024a90cba9d3d35d"
 
-  relative_path "curl-#{version}"
+relative_path "curl-#{version}"
 
-  build do
-    ship_license "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
-    block do
-      FileUtils.rm_rf(File.join(project_dir, "src/tool_hugehelp.c"))
-    end
-
-    # curl requires pkg-config that is shipped with the agent
-    env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
-    command ["./configure",
-             "--prefix=#{install_dir}/embedded",
-             "--disable-manual",
-             "--disable-debug",
-             "--enable-optimize",
-             "--disable-ldap",
-             "--disable-ldaps",
-             "--disable-rtsp",
-             "--enable-proxy",
-             "--disable-dependency-tracking",
-             "--enable-ipv6",
-             "--without-libidn",
-             "--without-gnutls",
-             "--without-librtmp",
-             "--without-libssh2",
-             "--with-ssl=#{install_dir}/embedded",
-             "--with-zlib=#{install_dir}/embedded",
-             "--with-nghttp2=#{install_dir}/embedded"].join(" "), env: env
-
-    command "make -j #{workers}", :env => { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
-    command "make install"
+build do
+  ship_license "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
+  block do
+    FileUtils.rm_rf(File.join(project_dir, "src/tool_hugehelp.c"))
   end
-else
-  version "7.59.0" # still needs to be bumped to >7.64.0
 
-  # Compiling is hard... let's ship binaries instead : TODO: react according to platform
-  source :url => "https://mirrors.kernel.org/sources.redhat.com/cygwin/x86_64/release/curl/libcurl4/libcurl4-#{version}-1.tar.xz",
-         :sha256 => "3381a39ddf7a034b6c23b68863fa868437244c71619ec8e4c357cd45d08ac71d",
-         :extract => :seven_zip
+  # curl requires pkg-config that is shipped with the agent
+  env = { "PATH" => "#{install_dir}/embedded/bin" + File::PATH_SEPARATOR + ENV["PATH"] }
+  command ["./configure",
+           "--prefix=#{install_dir}/embedded",
+           "--disable-manual",
+           "--disable-debug",
+           "--enable-optimize",
+           "--disable-ldap",
+           "--disable-ldaps",
+           "--disable-rtsp",
+           "--enable-proxy",
+           "--disable-dependency-tracking",
+           "--enable-ipv6",
+           "--without-libidn",
+           "--without-gnutls",
+           "--without-librtmp",
+           "--without-libssh2",
+           "--with-ssl=#{install_dir}/embedded",
+           "--with-zlib=#{install_dir}/embedded",
+           "--with-nghttp2=#{install_dir}/embedded"].join(" "), env: env
 
-  relative_path "curl"
-
-  build do
-    ship_license "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
-
-    copy "cygcurl-4.dll", "\"#{windows_safe_path(install_dir)}\\embedded\\Lib\\cygcurl.dll\""
-  end
+  command "make -j #{workers}", :env => { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
+  command "make install"
 end
