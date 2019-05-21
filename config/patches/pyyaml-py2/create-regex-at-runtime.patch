@@ -4,13 +4,13 @@ Date: Fri, 17 May 2019 13:47:57 +0200
 Subject: [PATCH] Create NON_PRINTABLE regex at runtime
 
 ---
- lib/yaml/reader.py | 14 ++++++++++----
+ reader.py | 14 ++++++++++----
  1 file changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/lib/yaml/reader.py b/lib/yaml/reader.py
+diff --git a/reader.py b/reader.py
 index b2f10b0..807c760 100644
---- a/lib/yaml/reader.py
-+++ b/lib/yaml/reader.py
+--- a/reader.py
++++ b/reader.py
 @@ -71,6 +71,7 @@ class Reader(object):
          self.index = 0
          self.line = 0
