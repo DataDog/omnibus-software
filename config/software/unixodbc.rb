@@ -2,10 +2,10 @@ name "unixodbc"
 default_version "2.3.7"
 
 version "2.3.7" do
-  source :sha256 => "d4d4dd039e0cc4d8ae7a0b0d09c25630521cf616921ec8c9293734ba70988fbc"
+  source :sha256 => "45f169ba1f454a72b8fcbb82abd832630a3bf93baa84731cf2949f449e1e3e77"
 end
 
-source :url => "https://downloads.sourceforge.net/unixodbc/unixODBC-#{version}.tar.gz"
+source :url => "ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-#{version}.tar.gz"
 
 relative_path "unixODBC-#{version}"
 
