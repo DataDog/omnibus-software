@@ -25,7 +25,7 @@ build do
     f.puts "#{version}"
   end
 
-  command("./autogen.sh", :env: env)
+  command("./autogen.sh", env: env)
   command(["./configure",
            "--prefix=#{install_dir}/embedded",
            "--without-ncurses",
