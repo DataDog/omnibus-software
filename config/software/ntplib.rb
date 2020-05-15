@@ -1,5 +1,5 @@
 name "ntplib"
-default_version "0.3.3"
+default_version "0.3.4"
 
 dependency "python"
 dependency "pip"
