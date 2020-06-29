@@ -35,9 +35,11 @@ build do
       copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/certs/cacert.pem"
       copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/cert.pem"
     end
-    mkdir "#{python_3_embedded}/ssl/certs"
-    copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
-    copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
+    if with_python_runtime? "3"
+      mkdir "#{python_3_embedded}/ssl/certs"
+      copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
+      copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
+    end
   else
     mkdir "#{install_dir}/embedded/ssl/certs"
     copy "#{project_dir}/cacert.pem", "#{install_dir}/embedded/ssl/certs/cacert.pem"
