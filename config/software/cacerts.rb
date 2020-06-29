@@ -30,10 +30,11 @@ build do
   ship_license "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt"
 
   if windows?
-    mkdir "#{python_2_embedded}/ssl/certs"
-    copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/certs/cacert.pem"
-    copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/cert.pem"
-
+    if with_python_runtime? "2"
+      mkdir "#{python_2_embedded}/ssl/certs"
+      copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/certs/cacert.pem"
+      copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/cert.pem"
+    end
     mkdir "#{python_3_embedded}/ssl/certs"
     copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
     copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
