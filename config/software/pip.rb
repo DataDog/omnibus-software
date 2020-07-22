@@ -29,7 +29,6 @@ version "18.1" do
   source sha256: "3ff036bbbce30f27b0ba440134defa66a135740c9e3401bd466e7f0d8153147c"
 end
 
-
 source :url => "https://github.com/pypa/pip/archive/#{version}.tar.gz",
        :extract => :seven_zip
 
