@@ -11,7 +11,7 @@ else
 end
 
 build do
-  ship_license "http://dd-agent-omnibus.s3.amazonaws.com/pyyaml-LICENSE"
+  ship_license "https://raw.githubusercontent.com/yaml/pyyaml/#{version}/LICENSE"
   pip "install --install-option=\"--install-scripts="\
       "#{windows_safe_path(install_dir)}/bin\" "\
       "#{name}==#{version}"
