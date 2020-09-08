@@ -16,10 +16,10 @@
 #
 
 name "libyaml"
-default_version "0.1.6"
+default_version "0.1.7"
 
 source :url => "https://github.com/yaml/libyaml/archive/#{version}.tar.gz",
-       :sha256 => "a0ad4b8cfa4b26c669c178af08147449ea7e6d50374cc26503edc56f3be894cf"
+       :sha256 => "e1884d0fa1eec8cf869ac6bebbf25391e81956aa2970267f974a9fa5e0b968e2"
 
 relative_path "libyaml-#{version}"
 
