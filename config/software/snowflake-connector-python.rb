@@ -13,9 +13,19 @@ build do
   patch source: "snowflake-connector-python-cryptography.patch", target: "setup.py"
 
   if ohai["platform"] == "windows"
-    python_bin = "\"#{windows_safe_path(python_2_embedded)}\\python.exe\""
-    command("#{python_bin} -m pip install .")
+    python_bin = "#{windows_safe_path(python_3_embedded)}\\python.exe"
+    python_prefix = "#{windows_safe_path(python_3_embedded)}"
   else
-    pip "install ."
+    python_bin = "#{install_dir}/embedded/bin/python3"
+    python_prefix = "#{install_dir}/embedded"
+  end
+
+  command "#{python_bin} -m pip install ."
+
+  if ohai["platform"] != "windows"
+    block do
+      FileUtils.rm_f(Dir.glob("#{install_dir}/embedded/lib/python3.*/site-packages/pip-*-py3.*.egg/pip/_vendor/distlib/*.exe"))
+      FileUtils.rm_f(Dir.glob("#{install_dir}/embedded/lib/python3.*/site-packages/pip/_vendor/distlib/*.exe"))
+    end
   end
 end
