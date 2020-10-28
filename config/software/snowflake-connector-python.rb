@@ -14,10 +14,8 @@ build do
 
   if ohai["platform"] == "windows"
     python_bin = "#{windows_safe_path(python_3_embedded)}\\python.exe"
-    python_prefix = "#{windows_safe_path(python_3_embedded)}"
   else
     python_bin = "#{install_dir}/embedded/bin/python3"
-    python_prefix = "#{install_dir}/embedded"
   end
 
   command "#{python_bin} -m pip install ."
