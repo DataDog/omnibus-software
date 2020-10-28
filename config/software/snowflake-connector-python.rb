@@ -10,8 +10,12 @@ source url: "https://github.com/snowflakedb/snowflake-connector-python/archive/v
 
 build do
   ship_license "https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v#{version}/LICENSE.txt"
-
   patch source: "snowflake-connector-python-cryptography.patch", target: "setup.py"
 
-  command "#{python_bin} -m pip install ."
+  if ohai["platform"] == "windows"
+    python_bin = "\"#{windows_safe_path(python_2_embedded)}\\python.exe\""
+    command("#{python_bin} -m pip install .")
+  else
+    pip "install ."
+  end
 end
