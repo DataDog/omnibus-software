@@ -11,16 +11,30 @@ else
   end
 end
 
+target_bundle = "jmxfetch-#{version}-jar-with-dependencies.jar"
+
+source_bundle = "jmxfetch-#{version}-jar-with-dependencies.jar"
+source :url => "https://oss.sonatype.org/service/local/repositories/releases/content/com/datadoghq/jmxfetch/#{version}/#{target_bundle}"
+
+# XXX: Versions 0.26.6-0.26.8 have a different bundled jar filename due to the way manual
+# publishing of those versions was processed by Sonatype so they require a filename
+# override.
 version "0.26.8" do
-  source sha256: "8b4a8f8f8357fcb63c7cd60f10afd2fa4df0cafc18b173bfb0d02efce41cdf70"
+  source_bundle = "jmxfetch-#{version}-dependencies.jar"
+  source :url => "https://oss.sonatype.org/service/local/repositories/releases/content/com/datadoghq/jmxfetch/#{version}/#{source_bundle}",
+         :sha256 => "8b4a8f8f8357fcb63c7cd60f10afd2fa4df0cafc18b173bfb0d02efce41cdf70"
 end
 
 version "0.26.7" do
-  source sha256: "4e3b13d1660dc3d1168bfdaf16c3dd8c2f984c63521dc32133f6291ff6a828fe"
+  source_bundle = "jmxfetch-#{version}-dependencies.jar"
+  source :url => "https://oss.sonatype.org/service/local/repositories/releases/content/com/datadoghq/jmxfetch/#{version}/#{source_bundle}",
+         :sha256 => "4e3b13d1660dc3d1168bfdaf16c3dd8c2f984c63521dc32133f6291ff6a828fe"
 end
 
 version "0.26.6" do
-  source sha256: "1e80b6b05229c1720ddd6b8974892458b85048a64a3a0f3b58ea58d2e23016f4"
+  source_bundle = "jmxfetch-#{version}-dependencies.jar"
+  source :url => "https://oss.sonatype.org/service/local/repositories/releases/content/com/datadoghq/jmxfetch/#{version}/#{source_bundle}",
+         :sha256 => "1e80b6b05229c1720ddd6b8974892458b85048a64a3a0f3b58ea58d2e23016f4"
 end
 
 jar_dir = "#{install_dir}/agent/checks/libs"
@@ -29,13 +43,11 @@ if agent_version[0] == "6"
   jar_dir = "#{install_dir}/bin/agent/dist/jmx"
 end
 
-source :url => "https://dl.bintray.com/datadog/datadog-maven/com/datadoghq/jmxfetch/#{version}/jmxfetch-#{version}-jar-with-dependencies.jar"
-
 relative_path "jmxfetch"
 
 build do
   ship_license "https://raw.githubusercontent.com/DataDog/jmxfetch/master/LICENSE"
   mkdir jar_dir
-  copy "jmxfetch-#{version}-jar-with-dependencies.jar", jar_dir
-  block { File.chmod(0644, "#{jar_dir}/jmxfetch-#{version}-jar-with-dependencies.jar") }
+  copy source_bundle, "#{jar_dir}/#{target_bundle}"
+  block { File.chmod(0644, "#{jar_dir}/#{target_bundle}") }
 end
