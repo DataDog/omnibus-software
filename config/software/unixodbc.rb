@@ -26,6 +26,8 @@ build do
   make env: env
   make "install", env: env
 
+  # Remove the sample (empty) files unixodbc adds, otherwise they will replace
+  # any user-added configuration on upgrade.
   delete "#{install_dir}/embedded/etc/odbc.ini"
   delete "#{install_dir}/embedded/etc/odbcinst.ini"
 
