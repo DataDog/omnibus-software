@@ -18,7 +18,7 @@
 name "liblzma"
 default_version "5.0.5"
 
-source url: "http://tukaani.org/xz/xz-#{version}.tar.gz",
+source url: "https://tukaani.org/xz/xz-#{version}.tar.gz",
        sha256: "5dcffe6a3726d23d1711a65288de2e215b4960da5092248ce63c99d50093b93a"
 
 relative_path "xz-#{version}"

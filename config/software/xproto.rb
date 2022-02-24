@@ -2,7 +2,7 @@
 name "xproto"
 default_version "7.0.27"
 
-source url: "http://xorg.freedesktop.org/releases/individual/proto/xproto-#{version}.tar.gz",
+source url: "https://xorg.freedesktop.org/releases/individual/proto/xproto-#{version}.tar.gz",
        sha256: "693d6ae50cb642fc4de6ab1f69e3f38a8e5a67eb41ac2aca253240f999282b6b",
        extract: :seven_zip
 
