@@ -30,7 +30,7 @@ env = with_standard_compiler_flags(env)
 
 build do
   license "MIT"
-  license_file "https://raw.githubusercontent.com/yaml/libyaml/#{version}/LICENSE"
+  license_file "./LICENSE"
 
   update_config_guess(target: "config")
 
