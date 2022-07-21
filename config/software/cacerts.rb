@@ -29,9 +29,9 @@ name "cacerts"
 # cacerts bundle changes.
 # This allows us to always use up-to-date cacerts, without breaking all builds
 # when they change.
-default_version "2022-04-26"
+default_version "2022-07-19"
 source url: "https://curl.se/ca/cacert-#{version}.pem",
-       sha256: "2e6381065877c8ba5ae863552f15da6ba8b49f71704b4f92896f4fd0138a1b7c",
+       sha256: "6ed95025fba2aef0ce7b647607225745624497f876d74ef6ec22b26e73e9de77",
        target_filename: "cacert.pem"
 
 relative_path "cacerts-#{version}"
