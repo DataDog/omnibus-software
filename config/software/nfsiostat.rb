@@ -16,7 +16,7 @@
 #
 
 name "nfsiostat"
-default_version "nfs-utils-2-1-1"
+default_version "vsock"
 
 source :git => "https://github.com/stefanha/nfs-utils.git"
 
