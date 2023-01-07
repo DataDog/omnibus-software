@@ -1,5 +1,5 @@
 name "datadog-gohai"
-default_version "last-stable"
+default_version "agent-v5"
 
 always_build true
 
