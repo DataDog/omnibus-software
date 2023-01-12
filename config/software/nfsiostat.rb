@@ -24,7 +24,7 @@ end
 
 source :url => "https://cdn.kernel.org/pub/linux/utils/nfs-utils/#{version}/nfs-utils-#{version}.tar.gz"
 
-relative_path "nfs-utils"
+relative_path "nfs-utils-#{version}"
 
 build do
   mkdir "#{install_dir}/embedded/sbin/"
