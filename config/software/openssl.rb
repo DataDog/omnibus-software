@@ -169,10 +169,6 @@ build do
     else
       patch source: "openssl-1.1.1d-do-not-build-docs.patch", env: env
     end
-
-    if mac_os_x?
-      patch source: "openssl-1.1.1q-include-string.patch", env: env
-    end
   end
 
   command "make depend", env: env
