@@ -1,7 +1,7 @@
 name "nghttp2"
 default_version "1.41.0"
 
-dependency "openssl"
+dependency ENV["OMNIBUS_OPENSSL_SOFTWARE"] || "openssl"
 
 source url: "https://github.com/nghttp2/nghttp2/releases/download/v#{version}/nghttp2-#{version}.tar.gz"
 
