@@ -48,6 +48,7 @@ build do
   patch source: "makefile_no_bins.patch", plevel: 1, env: env # removes various binaries we don't want to ship
   patch source: "soname_install_dir.patch", env: env if mac_os_x?
   patch source: "aix_makefile.patch", env: env if aix?
+  patch source: "install_shared_libraries.patch"
 
   make "#{args}", env: env
   make "#{args} -f Makefile-libbz2_so", env: env
