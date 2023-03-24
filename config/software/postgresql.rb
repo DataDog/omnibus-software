@@ -60,4 +60,5 @@ build do
            "--with-libraries=#{install_dir}/embedded/lib"].join(" "), env: configure_env
   command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
   command "make install"
+  command "make -C src/bin uninstall"
 end
