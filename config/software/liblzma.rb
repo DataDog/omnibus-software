@@ -35,6 +35,7 @@ build do
   # flags used across tools such as windres.  Don't put anything in it
   # that can be misinterpreted by windres.
   env["CPPFLAGS"] = "-I#{install_dir}/embedded/include" if windows?
+  env["CFLAGS"] << " -fPIC"
 
   config_command = [
     "--disable-debug",
