@@ -1,6 +1,5 @@
 #
-# Copyright:: Copyright (c) 2012-2014 Chef Software, Inc.
-# License:: Apache License, Version 2.0
+# Copyright:: Chef Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,41 +15,49 @@
 #
 
 name "libxml2"
-default_version "2.9.4"
+default_version "2.9.14"
+
+license "MIT"
+license_file "COPYING"
+skip_transitive_dependency_licensing true
 
 dependency "zlib"
-dependency "libiconv"
 dependency "liblzma"
+dependency "config_guess"
 
-version "2.7.8" do
-  source md5: "8127a65e8c3b08856093099b52599c86"
-end
+# version_list: url=https://download.gnome.org/sources/libxml2/2.9/ filter=*.tar.xz
+version("2.9.14") { source sha256: "60d74a257d1ccec0475e749cba2f21559e48139efba6ff28224357c7c798dfee" }
+version("2.9.13") { source sha256: "276130602d12fe484ecc03447ee5e759d0465558fbc9d6bd144e3745306ebf0e" }
+version("2.9.12") { source sha256: "28a92f6ab1f311acf5e478564c49088ef0ac77090d9c719bbc5d518f1fe62eb9" }
+version("2.9.10") { source sha256: "593b7b751dd18c2d6abcd0c4bcb29efc203d0b4373a6df98e3a455ea74ae2813" }
+version("2.9.9")  { source sha256: "58a5c05a2951f8b47656b676ce1017921a29f6b1419c45e3baed0d6435ba03f5" }
 
-version "2.9.1" do
-  source md5: "9c0cfef285d5c4a5c80d00904ddab380"
-end
-
-version "2.9.4" do
-  source sha256: "ffb911191e509b966deb55de705387f14156e1a56b21824357cdf0053233633c"
-end
-
-source url: "ftp://xmlsoft.org/libxml2/libxml2-#{version}.tar.gz"
+source url: "https://download.gnome.org/sources/libxml2/2.9/libxml2-#{version}.tar.xz"
 
 relative_path "libxml2-#{version}"
 
 build do
-  cmd = ["./configure",
-         "--prefix=#{install_dir}/embedded",
-         "--with-zlib=#{install_dir}/embedded",
-         "--with-iconv=#{install_dir}/embedded",
-         "--without-python",
-         "--without-icu"].join(" ")
-  env = {
-    "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-    "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-    "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
-  }
-  command cmd, env: env
-  command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
-  command "make install", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
+  env = with_standard_compiler_flags(with_embedded_path)
+
+  configure_command = [
+    "--with-zlib=#{install_dir}/embedded",
+    "--with-lzma=#{install_dir}/embedded",
+    "--with-sax1", # required for nokogiri to compile
+    "--without-iconv",
+    "--without-python",
+    "--without-icu",
+    "--without-debug",
+    "--without-mem-debug",
+    "--without-run-debug",
+    "--without-legacy", # we don't need legacy interfaces
+    "--without-catalog",
+    "--without-docbook",
+  ]
+
+  update_config_guess
+
+  configure(*configure_command, env: env)
+
+  make "-j #{workers}", env: env
+  make "install", env: env
 end
