@@ -48,6 +48,7 @@ build do
   end
 
   command "./configure" \
+          " --disable-static" \
           " --without-examples" \
           " --without-tests" \
           " --prefix=#{install_dir}/embedded", env: env
