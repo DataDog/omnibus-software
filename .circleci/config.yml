@@ -7,9 +7,8 @@ jobs:
     steps:
       - checkout
       - run: gem install bundler -v 1.17.3 --no-document
-      - run: ls
       - run: bundle install --jobs 7
-      - run: bundle exec rake travis:ci
+      - run: bundle exec rake
 
 
 workflows:
