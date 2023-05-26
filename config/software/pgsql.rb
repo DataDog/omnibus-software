@@ -5,7 +5,7 @@ default_version "9.4.4"
 # WINDOWS ONLY !!!! (we ship binaries in ehre)
 
 source url: "http://get.enterprisedb.com/postgresql/postgresql-9.4.4-3-windows-x64-binaries.zip",
-       md5: "094d18f3534d1a6c1cab17d37fb88319"
+       sha256: "1406d455b4d7e9f465180343d001b910aeaeff562beac36724374d847ed8598e"
 
 build do
   license "BSD-3-Clause"

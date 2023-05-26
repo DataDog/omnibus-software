@@ -2,7 +2,7 @@ name "perl"
 default_version "5.18.1"
 
 source url: "http://www.cpan.org/src/5.0/perl-#{version}.tar.gz",
-       md5: "304cb5bd18e48c44edd6053337d3386d"
+       sha256: "655e11a8ffba8853efcdce568a142c232600ed120ac24aaebb4e6efe74e85b2b"
 
 relative_path "perl-#{version}"
 
