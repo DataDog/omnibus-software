@@ -36,7 +36,7 @@ version("2.1.2")      { source sha256: "f22a6447811a81f3c808d1c2a5ce3b5f5f0955c6
 version("2.1.3")      { source sha256: "0818beb7b10ce9a058cd21d85cfe1dcd233e98b7342d32e9a5d4bebe98347f01" }
 version("2.1.4")      { source sha256: "bf9952cdeb3a0c6a5a27745c9b4c0e5e264e92b669b2b08efb363f5156549204" }
 
-source url: "http://cache.ruby-lang.org/pub/ruby/#{version.match(/^(\d+\.\d+)/)[0]}/ruby-#{version}.tar.gz"
+source url: "https://cache.ruby-lang.org/pub/ruby/#{version.match(/^(\d+\.\d+)/)[0]}/ruby-#{version}.tar.gz"
 
 relative_path "ruby-#{version}"
 

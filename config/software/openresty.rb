@@ -22,7 +22,7 @@ dependency "pcre"
 dependency "openssl"
 dependency "zlib"
 
-source url: "http://openresty.org/download/ngx_openresty-#{version}.tar.gz",
+source url: "https://openresty.org/download/ngx_openresty-#{version}.tar.gz",
        sha256: "ac98ed0d6569564e863cf352c7f305084daf7a3793687f6fc6e1003a993bd156"
 
 relative_path "ngx_openresty-#{version}"

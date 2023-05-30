@@ -21,7 +21,7 @@
 name "libarchive"
 default_version "3.1.2"
 
-source url: "http://www.libarchive.org/downloads/libarchive-#{version}.tar.gz",
+source url: "https://www.libarchive.org/downloads/libarchive-#{version}.tar.gz",
        sha256: "eb87eacd8fe49e8d90c8fdc189813023ccc319c5e752b01fb6ad0cc7b2c53d5e"
 
 relative_path "libarchive-#{version}"

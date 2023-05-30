@@ -26,7 +26,7 @@ version "2.4.7" do
   source sha256: "f91956377b7ff23cc23e0c8758e0b873032f36545c61d88436ebb741bf4dd5e1"
 end
 
-source url: "http://download.redis.io/releases/redis-#{version}.tar.gz"
+source url: "https://download.redis.io/releases/redis-#{version}.tar.gz"
 relative_path "redis-#{version}"
 
 make_args = ["PREFIX=#{install_dir}/embedded",

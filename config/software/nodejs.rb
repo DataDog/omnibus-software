@@ -28,7 +28,7 @@ version "0.10.26" do
   source sha256: "ef5e4ea6f2689ed7f781355012b942a2347e0299da0804a58de8e6281c4b1daa"
 end
 
-source url: "http://nodejs.org/dist/v#{version}/node-v#{version}.tar.gz"
+source url: "https://nodejs.org/dist/v#{version}/node-v#{version}.tar.gz"
 
 relative_path "node-v#{version}"
 

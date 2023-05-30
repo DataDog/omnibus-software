@@ -48,7 +48,7 @@ version "2.4.4" do
   source sha256: "c2658ffc6f9c75b34fea5498defa003f6e4e5df79eeeca84a1d57614ade5d2ab"
 end
 
-source url: "http://production.cf.rubygems.org/rubygems/rubygems-#{version}.tgz"
+source url: "https://production.cf.rubygems.org/rubygems/rubygems-#{version}.tgz"
 
 relative_path "rubygems-#{version}"
 

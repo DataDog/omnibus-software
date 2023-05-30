@@ -28,7 +28,7 @@ version "1.5.13" do
   source sha256: "0d4c82717aef11510902908d86d78b75ad76661e87295291baa34289c5187035"
 end
 
-source url: "http://downloads.sourceforge.net/libpng/libpng-#{version}.tar.gz"
+source url: "https://downloads.sourceforge.net/libpng/libpng-#{version}.tar.gz"
 relative_path "libpng-#{version}"
 
 configure_env = {

@@ -18,7 +18,7 @@
 name "runit"
 default_version "2.1.1"
 
-source url: "http://smarden.org/runit/runit-2.1.1.tar.gz",
+source url: "https://smarden.org/runit/runit-2.1.1.tar.gz",
        sha256: "ffcf2d27b32f59ac14f2d4b0772a3eb80d9342685a2042b7fbbc472c07cf2a2c"
 
 relative_path "admin"

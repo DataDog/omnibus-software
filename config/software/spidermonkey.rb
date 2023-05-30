@@ -18,7 +18,7 @@
 name "spidermonkey"
 default_version "1.8.0"
 
-source url: "http://ftp.mozilla.org/pub/mozilla.org/js/js-1.8.0-rc1.tar.gz",
+source url: "https://ftp.mozilla.org/pub/mozilla.org/js/js-1.8.0-rc1.tar.gz",
        sha256: "374398699ac3fd802d98d642486cf6b0edc082a119c9c9c499945a0bc73e3413"
 
 relative_path "js"
