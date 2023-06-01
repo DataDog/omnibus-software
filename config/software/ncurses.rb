@@ -22,6 +22,8 @@ dependency "libgcc"
 dependency "libtool" if ohai["platform"] == "aix"
 dependency "config_guess"
 
+# Original binaries at https://invisible-island.net/archives/ncurses/current/
+# Cached on S3 as invisible-island.net blocks default Ruby http User-Agent request header
 source url: "https://s3.amazonaws.com/dd-agent-omnibus/ncurses-#{version}.tgz",
        sha256: "ded8c3b05c3af64b11b019fb2e07f41150a604208e0b6f07cce9ca7ebba54931",
        extract: :seven_zip
