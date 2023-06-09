@@ -16,7 +16,7 @@
 #
 
 name "postgresql"
-default_version "9.4.25"
+default_version "9.6.24"
 
 dependency "zlib"
 dependency "openssl" # openssl >= 1.1 is compatible with postgresql >=9.4
@@ -39,6 +39,10 @@ end
 # (9.4.12 for openssl 1.1.0 and 9.4.24 for visual studio)
 version "9.4.25" do
   source sha256: "cb98afaef4748de76c13202c14198e3e4717adde49fd9c90fdc81da877520928"
+end
+
+version "9.6.24" do
+  source sha256: "aeb7a196be3ebed1a7476ef565f39722187c108dd47da7489be9c4fcae982ace"
 end
 
 source url: "https://ftp.postgresql.org/pub/source/v#{version}/postgresql-#{version}.tar.bz2"
