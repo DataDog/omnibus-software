@@ -10,7 +10,7 @@ version("2.3.9") { source sha256: "52833eac3d681c8b0c9a5a65f2ebd745b3a964f208fc7
 # example, we hit https://trac.macports.org/ticket/4559.
 # Therefore we make unixodbc depend on postgresql to ensure postgresql is
 # always built first.
-# We do require postgresql everywhere where we need postgresql, so there's
+# We do require postgresql everywhere where we need unixodbc, so there's
 # no harm in doing that.
 dependency "postgresql"
 
