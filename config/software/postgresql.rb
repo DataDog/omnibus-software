@@ -16,7 +16,7 @@
 #
 
 name "postgresql"
-default_version "10.19" # 10.19 is the oldest version with OpenSSL 3 support
+default_version "16.0"
 
 dependency "zlib"
 dependency ENV["OMNIBUS_OPENSSL_SOFTWARE"] || "openssl"
