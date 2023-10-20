@@ -16,10 +16,14 @@
 #
 
 name "postgresql"
-default_version "10.19" # 10.19 is the oldest version with OpenSSL 3 support
+default_version "15.4"
 
 dependency "zlib"
 dependency ENV["OMNIBUS_OPENSSL_SOFTWARE"] || "openssl"
+
+version "15.4" do
+  source sha256: "baec5a4bdc4437336653b6cb5d9ed89be5bd5c0c58b94e0becee0a999e63c8f9"
+end
 
 version "10.19" do
   source sha256: "6eb830b428b60e84ae87e20436bce679c4d9d0202be7aec0e41b0c67d9134239"
