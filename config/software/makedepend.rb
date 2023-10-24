@@ -56,7 +56,7 @@ configure_env =
     }
   end
 
-configure_env["PKG_CONFIG_PATH"] = "#{install_dir}/embedded/lib/pkgconfig" +
+configure_env["PKG_CONFIG_LIBDIR"] = "#{install_dir}/embedded/lib/pkgconfig" +
   File::PATH_SEPARATOR +
   "#{install_dir}/embedded/share/pkgconfig"
 
