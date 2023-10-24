@@ -28,12 +28,11 @@ build do
   end
 
   command("./autogen.sh", env: env)
-  command(["./configure",
-           "--prefix=#{install_dir}/embedded",
-           "--without-ncurses",
-           "--disable-nls",
-           ""].join(" "),
-    env: env)
+  configure_options = [
+    "--without-ncurses",
+    "--disable-nls",
+  ]
+  configure *configure_options, env: env
   command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
   command "make install"
 
