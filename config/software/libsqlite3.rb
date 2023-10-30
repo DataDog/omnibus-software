@@ -18,11 +18,11 @@ build do
   license "Public-Domain"
 
   update_config_guess
-  command(["./configure",
-       "--prefix=#{install_dir}/embedded",
-       "--disable-nls",
-       "--disable-static"].join(" "),
-    env: env)
+  configure_options = [
+    "--disable-nls",
+    "--disable-static",
+  ]
+  configure(*configure_options, env: env)
   command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
   command "make install"
   delete "#{install_dir}/embedded/bin/sqlite3"
