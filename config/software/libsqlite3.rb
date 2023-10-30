@@ -1,12 +1,12 @@
 name "libsqlite3"
-default_version "3.35.5"
+default_version "3.43.1"
 
 dependency "config_guess"
 
-source url: "https://www.sqlite.org/2021/sqlite-autoconf-3350500.tar.gz",
-       sha256: "f52b72a5c319c3e516ed7a92e123139a6e87af08a2dc43d7757724f6132e6db0"
+source url: "https://www.sqlite.org/2023/sqlite-autoconf-3430101.tar.gz",
+       sha256: "098984eb36a684c90bc01c0eb7bda3273c327cbc3673d7d0bc195028c19fb7b0"
 
-relative_path "sqlite-autoconf-3350500"
+relative_path "sqlite-autoconf-3430100"
 
 env = {
   "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
