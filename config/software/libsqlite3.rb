@@ -27,7 +27,7 @@ build do
     "--disable-readline",
   ]
   configure(*configure_options, env: env)
-  command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
-  command "make install"
+  make "-j #{workers}", env: env
+  make "install"
   delete "#{install_dir}/embedded/bin/sqlite3"
 end
