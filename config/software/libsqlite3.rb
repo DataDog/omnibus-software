@@ -8,11 +8,7 @@ source url: "https://www.sqlite.org/2023/sqlite-autoconf-3430101.tar.gz",
 
 relative_path "sqlite-autoconf-3430100"
 
-env = {
-  "LDFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-  "CFLAGS" => "-L#{install_dir}/embedded/lib -I#{install_dir}/embedded/include",
-  "LD_RUN_PATH" => "#{install_dir}/embedded/lib",
-}
+env = with_standard_compiler_flags(with_embedded_path)
 
 build do
   license "Public-Domain"
