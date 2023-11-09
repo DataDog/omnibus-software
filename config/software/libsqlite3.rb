@@ -24,7 +24,7 @@ build do
     "--enable-shared",
     "--enable-pic",
     "--disable-editline",
-    "--disable-readling",
+    "--disable-readline",
   ]
   configure(*configure_options, env: env)
   command "make -j #{workers}", env: { "LD_RUN_PATH" => "#{install_dir}/embedded/lib" }
