@@ -30,6 +30,6 @@ wait-and-notify:
   stage: wait-and-notify
   <<: *skip_stable_branches
   script: |
-    export MESSAGE="Your omnibus-software test pipeline (${CI_PIPELINE_URL}) completed"
+    export MESSAGE="Your omnibus-software test pipeline completed"
     /usr/local/bin/notify.sh
 
