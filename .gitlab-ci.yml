@@ -2,6 +2,8 @@ include: "https://gitlab-templates.ddbuild.io/slack-notifier/sdm/template.yml"
 
 stages:
   - test
+  - after-test
+  - check-downstream
   - notify
 
 .skip_stable_branches: &skip_stable_branches
@@ -23,9 +25,33 @@ trigger-agent-build:
     RUN_ALL_BUILDS: "true"
     RUN_KITCHEN_TESTS: "true"
 
+on_success:
+  <<: *skip_stable_branches
+  stage: after-test
+  needs: ["trigger-agent-build"]
+  tags: ["arch:amd64"]
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64:v19805261-b468a29
+  when: on_success
+  script:
+    - echo success > output.pipeline
+  artifacts:
+    paths:
+      - output.pipeline
+    expire_in: 1 week
+
+check-downstream-pipeline:
+  <<: *skip_stable_branches
+  stage: check-downstream
+  tags: ["arch:amd64"]
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64:v19805261-b468a29
+  when: always
+  script:
+    - cat output.pipeline
+
 notify:
   extends: .slack-notifier-base
   stage: notify
+  dependencies: []
   <<: *skip_stable_branches
   script: |
     export MESSAGE="Your omnibus-software test pipeline completed"
