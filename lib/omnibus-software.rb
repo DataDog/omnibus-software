@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-# Dummy change to test detection
-
 require "pathname"
 require "omnibus"
 require "highline"
