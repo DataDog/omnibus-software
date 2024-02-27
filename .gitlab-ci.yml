@@ -15,7 +15,8 @@ stages:
     when: never
 
 trigger-agent-build:
-  rules: *skip_stable_branches
+  rules:
+    - *skip_stable_branches
     - when: always
   stage: test
   trigger:
@@ -27,7 +28,8 @@ trigger-agent-build:
     RUN_KITCHEN_TESTS: "true"
 
 on_success:
-  rules: *skip_stable_branches
+  rules:
+    - *skip_stable_branches
     - when: on_success
   stage: after-test
   needs: ["trigger-agent-build"]
@@ -41,7 +43,8 @@ on_success:
     expire_in: 1 week
 
 check-downstream-pipeline:
-  rules: *skip_stable_branches
+  rules:
+    - *skip_stable_branches
     - when: always
   stage: check-downstream
   tags: ["arch:amd64"]
@@ -53,7 +56,8 @@ notify:
   extends: .slack-notifier-base
   stage: notify
   dependencies: []
-  rules: *skip_stable_branches
+  rules:
+    - *skip_stable_branches
     - when: always
   script: |
     export MESSAGE="Your omnibus-software test pipeline completed"
