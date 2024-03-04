@@ -80,5 +80,5 @@ jobs:
           body: >
             Automatically created by merging ${{ github.event.pull_request.html_url }}
 
-            :warning: This PR is opened with the skip-qa labels by default. Please make sure this is appropriate
+            :warning: This PR is opened with the qa/no-code-change label by default. Please make sure this is appropriate
 
