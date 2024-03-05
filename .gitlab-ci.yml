@@ -17,7 +17,7 @@ stages:
 trigger-agent-build:
   rules:
     - *skip_stable_branches
-    - if 'true':
+    - if: 'true'
       changes:
         - "**/*.rb"
         - Rakefile
@@ -37,7 +37,7 @@ trigger-agent-build:
 on_success:
   rules:
     - *skip_stable_branches
-    - if 'true':
+    - if: 'true'
       changes:
         - "**/*.rb"
         - Rakefile
@@ -82,7 +82,7 @@ notify:
   dependencies: []
   rules:
     - *skip_stable_branches
-    - if 'true':
+    - if: 'true'
       changes:
         - "**/*.rb"
         - Rakefile
