@@ -17,7 +17,14 @@ stages:
 trigger-agent-build:
   rules:
     - *skip_stable_branches
-    - when: always
+    - if true:
+      changes:
+        - "**/*.rb"
+        - Rakefile
+        - omnibus-software.gemspec
+        - Gemfile
+      when: always
+    - when: never
   stage: test
   trigger:
     project: datadog/datadog-agent
@@ -26,12 +33,6 @@ trigger-agent-build:
     OMNIBUS_SOFTWARE_VERSION: $CI_COMMIT_BRANCH
     RUN_ALL_BUILDS: "true"
     RUN_KITCHEN_TESTS: "true"
-  only:
-    - changes:
-      - "**/*.rb"
-      - Rakefile
-      - omnibus-software.gemspec
-      - Gemfile
 
 on_success:
   rules:
@@ -42,8 +43,8 @@ on_success:
         - Rakefile
         - omnibus-software.gemspec
         - Gemfile
-      when: always
-    - when: on_success
+      when: on_success
+    - when: always
   stage: after-test
   needs: ["trigger-agent-build"]
   tags: ["arch:amd64"]
@@ -81,13 +82,14 @@ notify:
   dependencies: []
   rules:
     - *skip_stable_branches
-    - when: always
-  only:
-    - changes:
-      - "**/*.rb"
-      - Rakefile
-      - omnibus-software.gemspec
-      - Gemfile
+    - if true:
+      changes:
+        - "**/*.rb"
+        - Rakefile
+        - omnibus-software.gemspec
+        - Gemfile
+      when: always
+    - when: never
   script: |
     export MESSAGE="Your omnibus-software test pipeline completed"
     /usr/local/bin/notify.sh
