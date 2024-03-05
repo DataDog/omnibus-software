@@ -14,8 +14,7 @@ stages:
   - if: $CI_COMMIT_TAG != null
     when: never
   - changes:
-      - lib/*
-      - config/*
+      - **/*.rb
       - Rakefile
       - omnibus-software.gemspec
       - Gemfile
