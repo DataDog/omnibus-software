@@ -6,6 +6,7 @@ stages:
   - check-downstream
   - notify
 
+# We're using two anchors because Gitlab doesn't allow us to use multiple anchors inside of a rules field.
 .skip_stable_branches: &skip_stable_branches
   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
     when: never
