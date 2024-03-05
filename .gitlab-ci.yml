@@ -69,6 +69,7 @@ notify:
   rules:
     - *skip_stable_branches
     - when: always
-  script: |
-    export MESSAGE="Your omnibus-software test pipeline completed"
-    /usr/local/bin/notify.sh
+  script:
+    - set +x
+    - export GITLAB_TOKEN=$(aws ssm get-parameter --region us-east-1 --name ci.datadog-agent.gitlab_read_api_token --with-decryption --query "Parameter.Value" --out text)
+    - MESSAGE="Your omnibus-software test pipeline completed" /usr/local/bin/notify.sh
