@@ -13,11 +13,6 @@ stages:
     when: never
   - if: $CI_COMMIT_TAG != null
     when: never
-  - changes:
-      - "**/*.rb"
-      - Rakefile
-      - omnibus-software.gemspec
-      - Gemfile
 
 trigger-agent-build:
   rules:
@@ -31,10 +26,23 @@ trigger-agent-build:
     OMNIBUS_SOFTWARE_VERSION: $CI_COMMIT_BRANCH
     RUN_ALL_BUILDS: "true"
     RUN_KITCHEN_TESTS: "true"
+  only:
+    - changes:
+      - "**/*.rb"
+      - Rakefile
+      - omnibus-software.gemspec
+      - Gemfile
 
 on_success:
   rules:
     - *skip_stable_branches
+    - if true:
+      changes:
+        - "**/*.rb"
+        - Rakefile
+        - omnibus-software.gemspec
+        - Gemfile
+      when: always
     - when: on_success
   stage: after-test
   needs: ["trigger-agent-build"]
@@ -74,6 +82,12 @@ notify:
   rules:
     - *skip_stable_branches
     - when: always
+  only:
+    - changes:
+      - "**/*.rb"
+      - Rakefile
+      - omnibus-software.gemspec
+      - Gemfile
   script: |
     export MESSAGE="Your omnibus-software test pipeline completed"
     /usr/local/bin/notify.sh
