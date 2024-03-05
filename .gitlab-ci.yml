@@ -14,14 +14,17 @@ stages:
   - if: $CI_COMMIT_TAG != null
     when: never
 
+.on_changes: &on_changes
+  - changes:
+    - "**/*.rb"
+    - Rakefile
+    - omnibus-software.gemspec
+    - Gemfile
+
 trigger-agent-build:
   rules:
     - *skip_stable_branches
-    - changes:
-        - "**/*.rb"
-        - Rakefile
-        - omnibus-software.gemspec
-        - Gemfile
+    - *on_changes
       when: always
     - when: never
   stage: test
@@ -36,11 +39,7 @@ trigger-agent-build:
 on_success:
   rules:
     - *skip_stable_branches
-    - changes:
-        - "**/*.rb"
-        - Rakefile
-        - omnibus-software.gemspec
-        - Gemfile
+    - *on_changes
       when: on_success
     - when: always
   stage: after-test
@@ -82,11 +81,7 @@ notify:
   dependencies: []
   rules:
     - *skip_stable_branches
-    - changes:
-        - "**/*.rb"
-        - Rakefile
-        - omnibus-software.gemspec
-        - Gemfile
+    - *on_changes
       when: always
     - when: never
   script: |
