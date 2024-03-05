@@ -17,8 +17,7 @@ stages:
 trigger-agent-build:
   rules:
     - *skip_stable_branches
-    - if: 'true'
-      changes:
+    - changes:
         - "**/*.rb"
         - Rakefile
         - omnibus-software.gemspec
@@ -37,8 +36,7 @@ trigger-agent-build:
 on_success:
   rules:
     - *skip_stable_branches
-    - if: 'true'
-      changes:
+    - changes:
         - "**/*.rb"
         - Rakefile
         - omnibus-software.gemspec
@@ -82,8 +80,7 @@ notify:
   dependencies: []
   rules:
     - *skip_stable_branches
-    - if: 'true'
-      changes:
+    - changes:
         - "**/*.rb"
         - Rakefile
         - omnibus-software.gemspec
