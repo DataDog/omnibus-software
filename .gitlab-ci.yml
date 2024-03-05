@@ -44,7 +44,9 @@ on_success:
       when: on_success
     - when: always
   stage: after-test
-  needs: ["trigger-agent-build"]
+  needs:
+    - job: "trigger-agent-build"
+      optional: true
   tags: ["arch:amd64"]
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-buildimages/deb_x64:v19805261-b468a29
   script:
