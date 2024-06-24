@@ -1,9 +1,9 @@
 name: Open datadog-agent PR
 run-name:
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types:
+      - closed
 
 jobs:
   open_bump_pr:
