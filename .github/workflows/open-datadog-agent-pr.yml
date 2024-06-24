@@ -1,9 +1,9 @@
 name: Open datadog-agent PR
 run-name:
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - master
 
 jobs:
   open_bump_pr:
@@ -40,7 +40,7 @@ jobs:
       - name: Setup Python3
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11.5"
+          python-version: "3.11.8"
           cache: "pip"
 
       - name: Install python deps
