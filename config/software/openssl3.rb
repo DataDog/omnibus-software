@@ -91,7 +91,7 @@ build do
 
   command "make depend", env: env
   command "make -j #{workers}", env: env
-  command "make install_sw", env: env
+  command "make install_sw install_ssldirs", env: env
 
   delete "#{install_dir}/embedded/bin/c_rehash"
   unless windows?
