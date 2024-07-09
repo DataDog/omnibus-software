@@ -89,11 +89,9 @@ build do
 
   command configure_command, env: env, in_msys_bash: true
 
-  command "sed -i 's/^install_docs:.*/install_docs:/g' Makefile", env: env
-
   command "make depend", env: env
   command "make -j #{workers}", env: env
-  command "make install", env: env
+  command "make install_sw", env: env
 
   delete "#{install_dir}/embedded/bin/c_rehash"
   unless windows?
