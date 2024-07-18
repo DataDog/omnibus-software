@@ -29,9 +29,6 @@ relative_path "curl-#{version}"
 build do
   license "Curl"
   license_file "https://raw.githubusercontent.com/bagder/curl/master/COPYING"
-  block do
-    FileUtils.rm_rf(File.join(project_dir, "src/tool_hugehelp.c"))
-  end
   env = with_standard_compiler_flags(with_embedded_path)
 
   configure_options = [
