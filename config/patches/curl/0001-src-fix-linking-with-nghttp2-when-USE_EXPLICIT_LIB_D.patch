@@ -1,0 +1,39 @@
+From 17064edc2083593b707166592e384da6994ff147 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Hugo=20Beauz=C3=A9e-Luyssen?= <hugo.beauzee@datadoghq.com>
+Date: Tue, 7 Nov 2023 11:00:41 +0100
+Subject: [PATCH] src: fix linking with nghttp2 when USE_EXPLICIT_LIB_DEPS
+ isn't set
+
+---
+ configure.ac    | 1 +
+ src/Makefile.am | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 1e18b8156..6853f01dd 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2816,6 +2816,7 @@ if test X"$want_nghttp2" != Xno; then
+   LDFLAGS="$LDFLAGS $LD_H2"
+   CPPFLAGS="$CPPFLAGS $CPP_H2"
+   LIBS="$LIB_H2 $LIBS"
++  AC_SUBST(LIB_H2)
+ 
+   # use nghttp2_session_get_stream_local_window_size to require nghttp2
+   # >= 1.15.0
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 4ce83c923..b6ae554d5 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -70,7 +70,7 @@ LIBS = $(BLANK_AT_MAKETIME)
+ if USE_EXPLICIT_LIB_DEPS
+ curl_LDADD = $(top_builddir)/lib/libcurl.la @LIBCURL_LIBS@
+ else
+-curl_LDADD = $(top_builddir)/lib/libcurl.la @SSL_LIBS@ @ZLIB_LIBS@ @CURL_NETWORK_AND_TIME_LIBS@
++curl_LDADD = $(top_builddir)/lib/libcurl.la @LIB_H2@ @SSL_LIBS@ @ZLIB_LIBS@ @CURL_NETWORK_AND_TIME_LIBS@
+ endif
+ 
+ # if unit tests are enabled, build a static library to link them with
+-- 
+2.34.1
+
