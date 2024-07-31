@@ -32,6 +32,8 @@ build do
   env = with_standard_compiler_flags(with_embedded_path)
 
   patch source: "0001-src-fix-linking-with-nghttp2-when-USE_EXPLICIT_LIB_D.patch"
+  # Force a Makefile regeneration after applying the patch
+  command "autoreconf -i -f"
 
   configure_options = [
            "--disable-manual",
