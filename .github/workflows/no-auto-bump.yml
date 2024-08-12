@@ -5,6 +5,8 @@ on:
       - opened
       - synchronize
 
+permissions: {}
+
 jobs:
   labeler:
     permissions:
