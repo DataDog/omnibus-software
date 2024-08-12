@@ -57,7 +57,7 @@ jobs:
         id: new_sha
         run: |
           git fetch
-          NEW_SHA=$(git rev-parse f4usto/set-least-permissions-to-github-token-on-workflows)
+          NEW_SHA=$(git rev-parse origin/f4usto/set-least-permissions-to-github-token-on-workflows)
           echo NEW_SHA=${NEW_SHA} >> "${GITHUB_OUTPUT}"
 
       - name: Update release.json
