@@ -3,13 +3,13 @@ run-name:
 on:
   pull_request:
     types:
-      - closed
+      - assigned
 
 permissions: {}
 
 jobs:
   open_bump_pr:
-    if: github.event.pull_request.merged == true && !contains(github.event.pull_request.labels.*.name, 'no-auto-bump') && github.ref == 'refs/heads/master'
+    # if: github.event.pull_request.merged == true && !contains(github.event.pull_request.labels.*.name, 'no-auto-bump') && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     steps:
