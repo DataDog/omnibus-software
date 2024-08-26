@@ -16,13 +16,13 @@
 #
 
 name "curl"
-default_version "8.7.1"
+default_version "8.9.1"
 
 dependency "zlib"
 dependency ENV["OMNIBUS_OPENSSL_SOFTWARE"] || "openssl"
 dependency "nghttp2"
 source url:    "https://curl.haxx.se/download/curl-#{version}.tar.gz",
-       sha256: "f91249c87f68ea00cf27c44fdfa5a78423e41e71b7d408e5901a9896d905c495"
+       sha256: "291124a007ee5111997825940b3876b3048f7d31e73e9caa681b80fe48b2dcd5"
 
 relative_path "curl-#{version}"
 
