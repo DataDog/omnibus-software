@@ -22,7 +22,6 @@ skip_transitive_dependency_licensing true
 
 dependency "zlib"
 dependency "cacerts"
-dependency "makedepend" unless windows?
 
 default_version "3.3.1"
 
