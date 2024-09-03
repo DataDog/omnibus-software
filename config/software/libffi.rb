@@ -27,7 +27,7 @@ dependency "libtool" unless windows?
 
 version("3.4.6") { source sha256: "b0dea9df23c863a7a50e825440f3ebffabd65df1497108e5d437747843895a4e" }
 
-source url: "https://sourceware.org/ftp/libffi/libffi-#{version}.tar.gz"
+source url: "https://github.com/libffi/libffi/releases/download/v#{version}/libffi-#{version}.tar.gz"
 
 relative_path "libffi-#{version}"
 
