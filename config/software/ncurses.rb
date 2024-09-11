@@ -56,27 +56,7 @@ build do
 
   update_config_guess
 
-  # build wide-character libraries
-  configure_options = [
-    "--with-shared",
-    "--disable-static",
-    "--with-termlib",
-    "--without-debug",
-    "--without-normal", # AIX doesn't like building static libs
-    "--without-cxx-binding",
-    "--enable-overwrite",
-    "--enable-widec",
-    "--without-manpages",
-    "--without-tests",
-  ]
-
-  configure_options << "--with-libtool" if ohai["platform"] == "aix"
-  configure(*configure_options, env: env)
-  command "make -j #{workers}", env: env
-  command "make -j #{workers} install", env: env
-
   # build non-wide-character libraries
-  command "make distclean"
   configure_options = [
     "--with-shared",
     "--disable-static",
@@ -93,6 +73,26 @@ build do
   # installing the non-wide libraries will also install the non-wide
   # binaries, which doesn't happen to be a problem since we don't
   # utilize the ncurses binaries in private-chef (or oss chef)
+  command "make -j #{workers} install", env: env
+
+  # build wide-character libraries
+  command "make distclean"
+  configure_options = [
+    "--with-shared",
+    "--disable-static",
+    "--with-termlib",
+    "--without-debug",
+    "--without-normal", # AIX doesn't like building static libs
+    "--without-cxx-binding",
+    "--enable-overwrite",
+    "--enable-widec",
+    "--without-manpages",
+    "--without-tests",
+  ]
+
+  configure_options << "--with-libtool" if ohai["platform"] == "aix"
+  configure(*configure_options, env: env)
+  command "make -j #{workers}", env: env
   command "make -j #{workers} install", env: env
 
   # Ensure embedded ncurses wins in the LD search path
