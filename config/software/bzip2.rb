@@ -53,4 +53,14 @@ build do
   make "#{args} -f Makefile-libbz2_so", env: env
   make "#{args} install", env: env
   delete "#{install_dir}/embedded/lib/libbz2.a"
+
+  # The version of bzip2 we use doesn't create a pkgconfig file,
+  # we add it here manually (needed at least by the Python build)
+  erb source: "bzip2.pc.erb",
+      dest: "#{install_dir}/embedded/lib/pkgconfig/bzip2.pc",
+      vars: {
+        prefix: File.join(install_dir, "embedded"),
+        version: version,
+      }
+
 end
