@@ -41,16 +41,9 @@ build do
   license_file "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt"
 
   if windows?
-    if with_python_runtime? "2"
-      mkdir "#{python_2_embedded}/ssl/certs"
-      copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/certs/cacert.pem"
-      copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/cert.pem"
-    end
-    if with_python_runtime? "3"
-      mkdir "#{python_3_embedded}/ssl/certs"
-      copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
-      copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
-    end
+    mkdir "#{python_3_embedded}/ssl/certs"
+    copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
+    copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
   else
     mkdir "#{install_dir}/embedded/ssl/certs"
     copy "#{project_dir}/cacert.pem", "#{install_dir}/embedded/ssl/certs/cacert.pem"
