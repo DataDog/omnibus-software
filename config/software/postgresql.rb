@@ -19,7 +19,7 @@ name "postgresql"
 default_version "16.0"
 
 dependency "zlib"
-dependency ENV["OMNIBUS_OPENSSL_SOFTWARE"] || "openssl"
+dependency "openssl3"
 
 version "16.0" do
   source sha256: "df9e823eb22330444e1d48e52cc65135a652a6fdb3ce325e3f08549339f51b99"
