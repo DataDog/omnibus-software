@@ -39,6 +39,7 @@ build do
 
   env.delete("CPPFLAGS")
 
+  patch source: "0001-don-t-pass-stats-to-the-linker.patch"
   update_config_guess
 
   # build wide-character libraries

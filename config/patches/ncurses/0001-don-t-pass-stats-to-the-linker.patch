@@ -1,0 +1,56 @@
+From eca0e6b137676650719d0b467c030893d955b3f0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Hugo=20Beauz=C3=A9e-Luyssen?= <hugo.beauzee@datadoghq.com>
+Date: Mon, 2 Dec 2024 16:53:19 +0100
+Subject: [PATCH] don't pass -stats nor -lc to the linker.
+
+zig cc doesn't support it.
+This patch directly edit the generated configure instead of aclocals.m4
+because is seems autoreconf (maybe only recent versions?) is refusing to
+regenerate configure from ncurses' configure.in
+---
+ configure | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/configure b/configure
+index 412e5af2..9ef0b1ab 100755
+--- a/configure
++++ b/configure
+@@ -6775,7 +6775,7 @@ echo "${ECHO_T}$cf_cv_ldflags_search_paths_first" >&6
+ 		cf_cv_shared_soname='`basename $@`'
+ 	fi
+ 
+-		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname',-stats,-lc -o $@'
++		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname' -o $@'
+ 		;;
+ 	(hpux[7-8]*)
+ 		# HP-UX 8.07 ld lacks "+b" option used for libdir search-list
+@@ -6837,7 +6837,7 @@ echo "${ECHO_T}$cf_cv_ldflags_search_paths_first" >&6
+ 		cf_cv_shared_soname='`basename $@`'
+ 	fi
+ 
+-		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname',-stats,-lc -o $@'
++		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname' -o $@'
+ 		;;
+ 	(mingw*msvc*)
+ 		cf_cv_shlib_version=msvcdll
+@@ -6989,7 +6989,7 @@ CF_EOF
+ 		cf_cv_shared_soname='`basename $@`'
+ 	fi
+ 
+-		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-Bshareable,-soname,'$cf_cv_shared_soname',-stats,-lc -o $@'
++		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-Bshareable,-soname,'$cf_cv_shared_soname' -o $@'
+ 		;;
+ 	(nskJ*)
+ 		CC_SHARED_OPTS=
+@@ -7019,7 +7019,7 @@ CF_EOF
+ 		cf_cv_shared_soname='`basename $@`'
+ 	fi
+ 
+-		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname',-stats,-lc -o $@'
++		MK_SHARED_LIB='${CC} ${LDFLAGS} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname' -o $@'
+ 		;;
+ 	(netbsd*)
+ 		CC_SHARED_OPTS="$CC_SHARED_OPTS -DPIC"
+-- 
+2.34.1
+
