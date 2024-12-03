@@ -74,8 +74,10 @@ build do
   end
 
   configure_cmd =
-    if mac_os_x?
+    if mac_os_x? && !ohai["kernel"]["machine"].start_with?("arm")
       "./Configure darwin64-x86_64-cc"
+    elsif mac_os_x?
+      "./Configure darwin64-arm64"
     elsif windows?
       platform = windows_arch_i386? ? "mingw" : "mingw64"
       "perl.exe ./Configure #{platform}"
