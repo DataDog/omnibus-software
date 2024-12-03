@@ -19,7 +19,7 @@ name "curl"
 default_version "8.9.1"
 
 dependency "zlib"
-dependency ENV["OMNIBUS_OPENSSL_SOFTWARE"] || "openssl"
+dependency "openssl3"
 dependency "nghttp2"
 source url:    "https://curl.haxx.se/download/curl-#{version}.tar.gz",
        sha256: "291124a007ee5111997825940b3876b3048f7d31e73e9caa681b80fe48b2dcd5"
@@ -46,9 +46,9 @@ build do
            "--without-gnutls",
            "--without-librtmp",
            "--without-libssh2",
-           "--with-ssl=#{install_dir}/embedded",
-           "--with-zlib=#{install_dir}/embedded",
-           "--with-nghttp2=#{install_dir}/embedded",
+           "--with-ssl",
+           "--with-zlib",
+           "--with-nghttp2",
   ]
   configure(*configure_options, env: env)
 

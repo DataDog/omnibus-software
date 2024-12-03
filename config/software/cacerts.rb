@@ -29,9 +29,9 @@ name "cacerts"
 # cacerts bundle changes.
 # This allows us to always use up-to-date cacerts, without breaking all builds
 # when they change.
-default_version "2024-07-02"
+default_version "2024-11-26"
 source url: "https://curl.se/ca/cacert-#{version}.pem",
-       sha256: "1bf458412568e134a4514f5e170a328d11091e071c7110955c9884ed87972ac9",
+       sha256: "bb1782d281fe60d4a2dcf41bc229abe3e46c280212597d4abcc25bddf667739b",
        target_filename: "cacert.pem"
 
 relative_path "cacerts-#{version}"
@@ -41,16 +41,9 @@ build do
   license_file "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt"
 
   if windows?
-    if with_python_runtime? "2"
-      mkdir "#{python_2_embedded}/ssl/certs"
-      copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/certs/cacert.pem"
-      copy "#{project_dir}/cacert.pem", "#{python_2_embedded}/ssl/cert.pem"
-    end
-    if with_python_runtime? "3"
-      mkdir "#{python_3_embedded}/ssl/certs"
-      copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
-      copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
-    end
+    mkdir "#{python_3_embedded}/ssl/certs"
+    copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/certs/cacert.pem"
+    copy "#{project_dir}/cacert.pem", "#{python_3_embedded}/ssl/cert.pem"
   else
     mkdir "#{install_dir}/embedded/ssl/certs"
     copy "#{project_dir}/cacert.pem", "#{install_dir}/embedded/ssl/certs/cacert.pem"
