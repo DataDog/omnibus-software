@@ -49,6 +49,8 @@ build do
            "--with-ssl",
            "--with-zlib",
            "--with-nghttp2",
+           "--host=x86_64-linux-musl",
+           "--build=x86_64-unknown-linux-gnu",
   ]
   configure(*configure_options, env: env)
 
