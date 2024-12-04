@@ -38,6 +38,9 @@ build do
   env = with_standard_compiler_flags(with_embedded_path)
 
   patch source: "libxslt-solaris-configure.patch", env: env if solaris2? || omnios? || smartos?
+  patch source: "0001-always-include-stdlib.h.patch", env: env
+  patch source: "0002-remove-conditionally-available-symbols-from-the-vers.patch", env: env
+  patch source: "0001-build-Add-missing-includes.patch", env: env
 
   if windows?
     patch source: "libxslt-windows-relocate.patch", env: env
