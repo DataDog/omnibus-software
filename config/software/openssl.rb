@@ -97,8 +97,10 @@ build do
   configure_cmd =
     if aix?
       "perl ./Configure aix64-cc"
-    elsif mac_os_x?
+    elsif mac_os_x? && !ohai["kernel"]["machine"].start_with?("arm")
       "./Configure darwin64-x86_64-cc"
+    elsif mac_os_x?
+      "./Configure darwin64-arm64-cc"
     elsif smartos?
       "/bin/bash ./Configure solaris64-x86_64-gcc -static-libgcc"
     elsif omnios?
