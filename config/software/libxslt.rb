@@ -15,7 +15,7 @@
 #
 
 name "libxslt"
-default_version "1.1.37"
+default_version "1.1.42"
 
 license "MIT"
 license_file "COPYING"
@@ -26,7 +26,7 @@ dependency "liblzma"
 dependency "config_guess"
 
 # versions_list: url=https://download.gnome.org/sources/libxslt/1.1/ filter=*.tar.xz
-version("1.1.37") { source sha256: "3a4b27dc8027ccd6146725950336f1ec520928f320f144eb5fa7990ae6123ab4" }
+version("1.1.42") { source sha256: "85ca62cac0d41fc77d3f6033da9df6fd73d20ea2fc18b0a3609ffb4110e1baeb" }
 
 source url: "https://download.gnome.org/sources/libxslt/1.1/libxslt-#{version}.tar.xz"
 
@@ -40,7 +40,6 @@ build do
   patch source: "libxslt-solaris-configure.patch", env: env if solaris2? || omnios? || smartos?
   patch source: "0001-always-include-stdlib.h.patch", env: env
   patch source: "0002-remove-conditionally-available-symbols-from-the-vers.patch", env: env
-  patch source: "0001-build-Add-missing-includes.patch", env: env
 
   if windows?
     patch source: "libxslt-windows-relocate.patch", env: env
