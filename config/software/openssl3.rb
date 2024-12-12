@@ -100,5 +100,7 @@ build do
     # Remove openssl static libraries here as we can't disable those at build time
     delete "#{install_dir}/embedded/lib/libcrypto.a"
     delete "#{install_dir}/embedded/lib/libssl.a"
+  else
+    copy "ms/applink.c", "#{install_dir}/embedded/include/openssl"
   end
 end
