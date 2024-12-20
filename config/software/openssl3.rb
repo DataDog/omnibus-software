@@ -87,7 +87,7 @@ build do
   # the crazy platform specific compiler flags at the end.
   configure_args << env["CFLAGS"] << env["LDFLAGS"]
 
-  configure *configure_args, bin: configure_cmd, env: env, no_build_triplet: true
+  configure(*configure_args, bin: configure_cmd, env: env, no_build_triplet: true)
 
   command "make depend", env: env
   command "make -j #{workers}", env: env
