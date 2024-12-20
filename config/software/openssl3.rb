@@ -54,8 +54,18 @@ build do
     env["CXXFLAGS"] = env["CFLAGS"]
   end
 
-  configure_args = [
-    "--prefix=#{install_dir}/embedded",
+  configure_args = []
+  if mac_os_x?
+    configure_cmd = "./Configure"
+    configure_args << "darwin64-x86_64-cc"
+  elsif windows?
+    configure_cmd = "perl.exe ./Configure"
+    configure_args << (windows_arch_i386? ? "mingw" : "mingw64")
+  else
+    configure_cmd = "./config"
+  end
+
+  configure_args << [
     "--with-zlib-lib=#{install_dir}/embedded/lib",
     "--with-zlib-include=#{install_dir}/embedded/include",
     "--libdir=lib",
@@ -73,23 +83,11 @@ build do
     configure_args << "zlib"
   end
 
-  configure_cmd =
-    if mac_os_x?
-      "./Configure darwin64-x86_64-cc"
-    elsif windows?
-      platform = windows_arch_i386? ? "mingw" : "mingw64"
-      "perl.exe ./Configure #{platform}"
-    else
-      "./config"
-    end
-
   # Out of abundance of caution, we put the feature flags first and then
   # the crazy platform specific compiler flags at the end.
   configure_args << env["CFLAGS"] << env["LDFLAGS"]
 
-  configure_command = configure_args.unshift(configure_cmd).join(" ")
-
-  command configure_command, env: env, in_msys_bash: true
+  configure *configure_args, bin: configure_cmd, env: env, no_build_triplet: true
 
   command "make depend", env: env
   command "make -j #{workers}", env: env
@@ -101,6 +99,6 @@ build do
     delete "#{install_dir}/embedded/lib/libcrypto.a"
     delete "#{install_dir}/embedded/lib/libssl.a"
   else
-    copy "ms/applink.c", "#{install_dir}/embedded/include/openssl"
+    copy "ms/applink.c", "#{install_dir}/embedded3/include/openssl"
   end
 end
