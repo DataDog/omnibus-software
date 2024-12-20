@@ -55,7 +55,6 @@ build do
   end
 
   configure_args = [
-    "--prefix=#{install_dir}/embedded",
     "--with-zlib-lib=#{install_dir}/embedded/lib",
     "--with-zlib-include=#{install_dir}/embedded/include",
     "--libdir=lib",
