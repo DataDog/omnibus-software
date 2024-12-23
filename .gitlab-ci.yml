@@ -1,10 +1,19 @@
 include: "https://gitlab-templates.ddbuild.io/slack-notifier/v3-sdm/template.yml"
 
 stages:
+  - pre-test
   - test
   - after-test
   - check-downstream
   - notify
+
+check-if-branch-is-a-pr:
+  stage: pre-test
+  tags: ["arch:amd64"]
+  image: registry.ddbuild.io/ci/datadog-agent-buildimages/deb_x64:v48815877-9bfad02c
+  allow_failure: true
+  script: |
+    curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME"
 
 # We're using two anchors because Gitlab doesn't allow us to use multiple anchors inside of a rules field.
 .skip_stable_branches: &skip_stable_branches
