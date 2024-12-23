@@ -48,6 +48,7 @@ trigger-agent-build:
   rules:
     - *skip_stable_branches
     - when: never
+  needs: ["check-if-branch-is-a-pr"]
   stage: test
   trigger:
     project: datadog/datadog-agent
