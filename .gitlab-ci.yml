@@ -7,7 +7,7 @@ stages:
   - check-downstream
   - notify
 
-check-if-branch-is-a-pr:
+check_if_branch_is_a_pr:
   stage: pre-test
   tags: ["arch:amd64"]
   image: registry.ddbuild.io/ci/datadog-agent-buildimages/deb_x64:v48815877-9bfad02c
@@ -48,7 +48,9 @@ trigger-agent-build:
   rules:
     - *skip_stable_branches
     - when: never
-  needs: ["check-if-branch-is-a-pr"]
+  needs:
+    - job: "check_if_branch_is_a_pr"
+      optional: true
   stage: test
   trigger:
     project: datadog/datadog-agent
