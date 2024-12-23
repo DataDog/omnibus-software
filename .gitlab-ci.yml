@@ -28,7 +28,6 @@ check_if_branch_is_a_pr:
     - Rakefile
     - omnibus-software.gemspec
     - Gemfile
-    - .gitlab-ci.yml
     when: always
 
 .on_success_skip_stable_branches: &on_success_skip_stable_branches
@@ -43,11 +42,12 @@ check_if_branch_is_a_pr:
     - Rakefile
     - omnibus-software.gemspec
     - Gemfile
+    - .gitlab-ci.yml
     when: on_success
 
 trigger-agent-build:
   rules:
-    - *skip_stable_branches
+    - *on_success_skip_stable_branches
     - when: never
   needs:
     - job: "check_if_branch_is_a_pr"
