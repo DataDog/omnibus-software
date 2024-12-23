@@ -51,7 +51,6 @@ trigger-agent-build:
     - when: never
   needs:
     - job: "check_if_branch_is_a_pr"
-      optional: true
   stage: test
   trigger:
     project: datadog/datadog-agent
