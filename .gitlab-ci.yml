@@ -10,7 +10,7 @@ check_if_branch_is_a_pr:
   script: |
     cp .generated-pipeline.yml generated-pipeline.yml
     # Check if our current branch is inside the PR list of omnibus-software
-    echo "$CI_COMMIT_REF_NAME"
+    curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME"
     if curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME"
     then
       echo "Current commit is on a PR"
