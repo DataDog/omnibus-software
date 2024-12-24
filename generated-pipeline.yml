@@ -1,4 +1,4 @@
-stage:
+stages:
   - placeholder
 
 # We need a placeholder success job because we can't trigger empty pipelines
