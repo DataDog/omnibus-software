@@ -9,12 +9,13 @@ check_if_branch_is_a_pr:
   allow_failure: true
   script: |
     cp .generated-pipeline.yml generated-pipeline.yml
-    if curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME"
+    # Check if our current branch is inside the PR list of omnibus-software or is master
+    if curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME" || test "$CI_COMMIT_REF_NAME" = "master"
     then
-      echo "Current branch is a PR !"
+      echo "Current commit is on a PR or master."
       cp .gitlab-ci-agent-build.yml generated-pipeline.yml
     else
-      echo "Current branch is not a PR!"
+      echo "Current commit is not on a PR or master."
     fi
   artifacts:
     untracked: true
