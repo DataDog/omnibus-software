@@ -8,18 +8,27 @@ check_if_branch_is_a_pr:
   image: registry.ddbuild.io/ci/datadog-agent-buildimages/deb_x64:v48815877-9bfad02c
   allow_failure: true
   script: |
+    cp .generated-pipeline.yml generated-pipeline.yml
     if curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME"
     then
-      cp .gitlab-ci-agent-build.yml .generated-pipeline.yml
+      echo "Current branch is a PR !"
+      cp .gitlab-ci-agent-build.yml generated-pipeline.yml
+    else
+      echo "Current branch is not a PR!"
     fi
-    cat .generated-pipeline.yml
+  artifacts:
+    untracked: true
+    expire_in: 1h
+    paths:
+      - generated-pipeline.yml
 
 trigger_pipeline:
   stage: trigger
   needs:
-    - check_if_branch_is_a_pr
+    - job: check_if_branch_is_a_pr
+      artifacts: true
   trigger:
     include:
-      - local: .generated-pipeline.yml
+      - local: generated-pipeline.yml
 
 
