@@ -10,7 +10,7 @@ check_if_branch_is_a_pr:
   script: |
     if curl https://api.github.com/repos/DataDog/omnibus-software/pulls | grep "$CI_COMMIT_REF_NAME"
     then
-      cp .gitlab-ci-agent-build.yml generated-pipeline.yml
+      cp .gitlab-ci-agent-build.yml .generated-pipeline.yml
     fi
 
 trigger_pipeline:
@@ -19,6 +19,6 @@ trigger_pipeline:
     - check_if_branch_is_a_pr
   trigger:
     include:
-      - local: ./generated-pipeline
+      - local: ./.generated-pipeline.yml
 
 
