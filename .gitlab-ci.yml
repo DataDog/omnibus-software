@@ -30,5 +30,6 @@ trigger_pipeline:
   trigger:
     include:
       - artifact: generated-pipeline.yml
+        job: check_if_branch_is_a_pr
 
 
