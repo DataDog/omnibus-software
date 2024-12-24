@@ -19,6 +19,6 @@ trigger_pipeline:
     - check_if_branch_is_a_pr
   trigger:
     include:
-      - local: ./.generated-pipeline.yml
+      - local: .generated-pipeline.yml
 
 
