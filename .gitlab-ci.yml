@@ -29,6 +29,6 @@ trigger_pipeline:
       artifacts: true
   trigger:
     include:
-      - local: generated-pipeline.yml
+      - artifact: generated-pipeline.yml
 
 
