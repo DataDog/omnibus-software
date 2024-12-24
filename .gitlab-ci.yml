@@ -12,6 +12,7 @@ check_if_branch_is_a_pr:
     then
       cp .gitlab-ci-agent-build.yml .generated-pipeline.yml
     fi
+    cat .generated-pipeline.yml
 
 trigger_pipeline:
   stage: trigger
