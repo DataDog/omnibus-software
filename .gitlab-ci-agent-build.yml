@@ -19,6 +19,8 @@ stages:
     - Rakefile
     - omnibus-software.gemspec
     - Gemfile
+    - .gitlab*
+    - .generated-pipeline.yml 
     when: always
 
 .on_success_skip_stable_branches: &on_success_skip_stable_branches
@@ -33,6 +35,8 @@ stages:
     - Rakefile
     - omnibus-software.gemspec
     - Gemfile
+    - .gitlab*
+    - .generated-pipeline.yml 
     when: on_success
 
 trigger-agent-build:
