@@ -20,7 +20,8 @@ stages:
     - omnibus-software.gemspec
     - Gemfile
     - .gitlab*
-    - .generated-pipeline.yml 
+    - .generated-pipeline.yml
+    - .gitlab-ci-agent-build.yml
     when: always
 
 .on_success_skip_stable_branches: &on_success_skip_stable_branches
@@ -36,7 +37,8 @@ stages:
     - omnibus-software.gemspec
     - Gemfile
     - .gitlab*
-    - .generated-pipeline.yml 
+    - .generated-pipeline.yml
+    - .gitlab-ci-agent-build.yml
     when: on_success
 
 trigger-agent-build:
