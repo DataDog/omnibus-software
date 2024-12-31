@@ -1,0 +1,11 @@
+stages:
+  - placeholder
+
+# We need a placeholder success job because we can't trigger empty pipelines
+# Can be replaced by a useful gitlab job to run on non-PR commits
+success_job:
+  stage: placeholder
+  tags: ["arch:amd64"]
+  image: registry.ddbuild.io/ci/datadog-agent-buildimages/deb_x64:v48815877-9bfad02c
+  script:
+    - echo SUCCESS
