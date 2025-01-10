@@ -16,13 +16,13 @@
 #
 
 name "curl"
-default_version "8.9.1"
+default_version "8.11.1"
 
 dependency "zlib"
 dependency "openssl3"
 dependency "nghttp2"
 source url:    "https://curl.haxx.se/download/curl-#{version}.tar.gz",
-       sha256: "291124a007ee5111997825940b3876b3048f7d31e73e9caa681b80fe48b2dcd5"
+       sha256: "a889ac9dbba3644271bd9d1302b5c22a088893719b72be3487bc3d401e5c4e80"
 
 relative_path "curl-#{version}"
 
@@ -46,6 +46,7 @@ build do
            "--without-gnutls",
            "--without-librtmp",
            "--without-libssh2",
+           "--without-libpsl",
            "--with-ssl",
            "--with-zlib",
            "--with-nghttp2",
