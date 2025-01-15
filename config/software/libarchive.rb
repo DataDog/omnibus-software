@@ -41,6 +41,7 @@ build do
     "--disable-bsdcpio",
     "--without-lzmadec",
     "--without-openssl",
+    "--disable-static",
   ]
   configure(*configure_options, env: env)
   command "make -j #{workers}", env: env
