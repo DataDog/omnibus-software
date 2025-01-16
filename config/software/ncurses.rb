@@ -55,7 +55,7 @@ build do
     "--without-manpages",
     "--without-tests",
     "--without-progs",
-    "--disable-database",
+    "--disable-db-install",
   ]
 
   configure_options << "--with-libtool" if ohai["platform"] == "aix"
