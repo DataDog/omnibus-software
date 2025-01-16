@@ -50,6 +50,9 @@ build do
            "--with-ssl",
            "--with-zlib",
            "--with-nghttp2",
+           "--disable-docs",
+           "--disable-libcurl-option",
+           "--disable-versioned-symbols",
   ]
   configure(*configure_options, env: env)
 
