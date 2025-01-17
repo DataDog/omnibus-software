@@ -53,6 +53,27 @@ build do
            "--disable-docs",
            "--disable-libcurl-option",
            "--disable-versioned-symbols",
+           # Disable support for protocols we don't need
+           "--disable-dict",
+           "--disable-file",
+           "--disable-ftp",
+           "--disable-ftps",
+           "--disable-gopher",
+           "--disable-imap",
+           "--disable-imaps",
+           "--disable-ipfs",
+           "--disable-ipns",
+           "--disable-mqtt",
+           "--disable-pop3",
+           "--disable-pop3s",
+           "--disable-smb",
+           "--disable-smbs",
+           "--disable-smtp",
+           "--disable-smtps",
+           "--disable-telnet",
+           "--disable-tftp",
+           "--disable-ws",
+           "--disable-wss",
   ]
   configure(*configure_options, env: env)
 
