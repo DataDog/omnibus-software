@@ -50,6 +50,7 @@ build do
            "--disable-docs",
            "--disable-libcurl-option",
            "--disable-versioned-symbols",
+           "--enable-symbol-hiding",
            # Disable support for protocols we don't need
            "--disable-dict",
            "--disable-file",
