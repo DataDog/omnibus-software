@@ -26,6 +26,7 @@ build do
     "--disable-app",
     "--disable-examples",
     "--disable-hpack-tools",
+    "--disable-debug",
   ]
   configure(*configure_options, env: env)
   command "make -j #{workers}", env: env

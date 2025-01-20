@@ -54,6 +54,7 @@ build do
     "--without-profiler",
     "--without-debugger",
     "--disable-static",
+    "--without-debug",
   ]
 
   configure(*configure_commands, env: env)

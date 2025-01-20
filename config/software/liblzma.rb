@@ -48,8 +48,8 @@ build do
     "--disable-xzdec",
     "--disable-xz",
     "--disable-static",
+    "--disable-nls",
   ]
-  config_command << "--disable-nls" if windows?
 
   configure(*config_command, env: env)
 
