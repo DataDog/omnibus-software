@@ -44,6 +44,7 @@ relative_path "openssl-#{version}"
 build do
 
   env = with_standard_compiler_flags(with_embedded_path)
+  prefix = if !windows? then "#{install_dir}/embedded" else python_3_embedded end
   if windows?
     # XXX: OpenSSL explicitly sets -march=i486 and expects that to be honored.
     # It has OPENSSL_IA32_SSE2 controlling whether it emits optimized SSE2 code
@@ -83,8 +84,10 @@ build do
     if ENV['AGENT_FLAVOR'] == "fips"
       configure_args << '--openssldir="C:/Program Files/Datadog/Datadog Agent/embedded3/ssl"'
       # Provide a context name for our configuration through the registry
-      # This will need to be updated to OPENSSL_WINCTX starting once we update to the 3.4 version
-      configure_args << "-DWININSTALLCONTEXT=datadog-agent-fips"
+      # This is only available starting from 3.4.0
+      # configure_args << "-DOPENSSL_WINCTX=datadog-agent-fips"
+      # Instead, we set the prefix to the default install location, move files around, and cry in a corner
+      prefix = "C:/Program Files/Datadog/Datadog Agent/embedded3/"
     end
   else
     configure_args << "zlib"
@@ -94,7 +97,7 @@ build do
   # the crazy platform specific compiler flags at the end.
   configure_args << env["CFLAGS"] << env["LDFLAGS"]
 
-  configure(*configure_args, bin: configure_cmd, env: env, no_build_triplet: true)
+  configure(*configure_args, bin: configure_cmd, env: env, no_build_triplet: true, prefix: prefix)
 
   command "make depend", env: env
   command "make -j #{workers}", env: env
@@ -106,6 +109,9 @@ build do
     delete "#{install_dir}/embedded/lib/libcrypto.a"
     delete "#{install_dir}/embedded/lib/libssl.a"
   else
+    if ENV['AGENT_FLAVOR'] == "fips"
+      copy "#{prefix}/*", "#{install_dir}/embedded3/"
+    end
     copy "ms/applink.c", "#{install_dir}/embedded3/include/openssl"
   end
 end
