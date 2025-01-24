@@ -42,6 +42,7 @@ version("3.4.0") { source sha256: "e15dda82fe2fe8139dc2ac21a36d4ca01d5313c75f99f
 relative_path "openssl-#{version}"
 
 build do
+  patch source: "0001-fix-preprocessor-concatenation.patch"
 
   env = with_standard_compiler_flags(with_embedded_path)
   if windows?
