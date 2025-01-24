@@ -110,7 +110,7 @@ build do
     delete "#{install_dir}/embedded/lib/libssl.a"
   else
     if ENV['AGENT_FLAVOR'] == "fips"
-      copy "#{prefix}/*", "#{install_dir}/embedded3/"
+      copy "'C:/Program Files/Datadog/Datadog Agent/embedded3/*'", "#{install_dir}/embedded3/"
     end
     copy "ms/applink.c", "#{install_dir}/embedded3/include/openssl"
   end
