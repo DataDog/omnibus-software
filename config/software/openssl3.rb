@@ -87,7 +87,7 @@ build do
       # This is only available starting from 3.4.0
       # configure_args << "-DOPENSSL_WINCTX=datadog-agent-fips"
       # Instead, we set the prefix to the default install location, move files around, and cry in a corner
-      prefix = "C:/Program Files/Datadog/Datadog Agent/embedded3/"
+      prefix = "'C:/Program Files/Datadog/Datadog Agent/embedded3/'"
     end
   else
     configure_args << "zlib"
