@@ -83,7 +83,7 @@ build do
     if ENV['AGENT_FLAVOR'] == "fips"
       configure_args << '--openssldir="C:/Program Files/Datadog/Datadog Agent/embedded3/ssl"'
       # Provide a context name for our configuration through the registry
-      configure_args << "-DOPENSSL_WINCTX=datadog-agent-fips"
+      configure_args << "-DOSSL_WINCTX=datadog-fips-agent"
     end
   else
     configure_args << "zlib"
