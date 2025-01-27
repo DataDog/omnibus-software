@@ -16,6 +16,7 @@ stages:
     when: never
   - changes:
     - "**/*.rb"
+    - "config/patches/**"
     - Rakefile
     - omnibus-software.gemspec
     - Gemfile
