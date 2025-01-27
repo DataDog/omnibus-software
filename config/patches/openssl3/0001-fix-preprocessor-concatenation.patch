@@ -1,14 +1,31 @@
-From 9c67ef92cb39f39a214f8c778de428235b9b4d54 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Hugo=20Beauz=C3=A9e-Luyssen?= <hugo.beauzee@datadoghq.com>
-Date: Fri, 24 Jan 2025 17:05:19 +0100
-Subject: [PATCH] fix preprocessor concatenation
+From 5418b99172d0b55de9a42e8a36e87be239a37256 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Hugo=20Beauz=C3=A9e-Luyssen?= <hugo@beauzee.fr>
+Date: Mon, 27 Jan 2025 08:36:07 +0100
+Subject: [PATCH] crypto: fix preprocessor concatenation
 
+String litteral don't need the '##' operator, which causes build
+failures:
+crypto/defaults.c:kepi:23: error: pasting ""SOFTWARE\\WOW6432Node\\OpenSSL"" and ""-"" does not give a valid preprocessing token
 ---
- crypto/defaults.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ crypto/cversion.c | 2 +-
+ crypto/defaults.c | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/crypto/cversion.c b/crypto/cversion.c
+index 87154645b0..ae439c668b 100644
+--- a/crypto/cversion.c
++++ b/crypto/cversion.c
+@@ -72,7 +72,7 @@ DEFINE_RUN_ONCE_STATIC(version_strings_setup)
+ }
+ 
+ # define TOSTR(x) #x
+-# define OSSL_WINCTX_STRING "OSSL_WINCTX: \"" ## TOSTR(OSSL_WINCTX) ## "\""
++# define OSSL_WINCTX_STRING "OSSL_WINCTX: \"" TOSTR(OSSL_WINCTX) "\""
+ 
+ #endif
+ 
 diff --git a/crypto/defaults.c b/crypto/defaults.c
-index 908539cf31..0a40954c52 100644
+index 908539cf31..166dcb47d7 100644
 --- a/crypto/defaults.c
 +++ b/crypto/defaults.c
 @@ -19,7 +19,7 @@
@@ -16,15 +33,17 @@ index 908539cf31..0a40954c52 100644
  # define NOQUOTE(x) x
  # if defined(OSSL_WINCTX)
 -# define REGISTRY_KEY "SOFTWARE\\WOW6432Node\\OpenSSL" ##"-"## MAKESTR(OPENSSL_VERSION_MAJOR) ##"."## MAKESTR(OPENSSL_VERSION_MINOR) ##"-"## MAKESTR(OSSL_WINCTX)
-+# define REGISTRY_KEY "SOFTWARE\\WOW6432Node\\OpenSSL" "-" MAKESTR(OPENSSL_VERSION_MAJOR) "." MAKESTR(OPENSSL_VERSION_MINOR) "-" MAKESTR(OSSL_WINCTX)
++#  define REGISTRY_KEY "SOFTWARE\\WOW6432Node\\OpenSSL" "-" MAKESTR(OPENSSL_VERSION_MAJOR) "." MAKESTR(OPENSSL_VERSION_MINOR) "-" MAKESTR(OSSL_WINCTX)
  # endif
  
  /**
-@@ -70,7 +70,7 @@ static char *get_windows_regdirs(char *dst, LPCTSTR valuename)
+@@ -69,8 +69,8 @@ static char *get_windows_regdirs(char *dst, LPCTSTR valuename)
+     HKEY hkey;
      LSTATUS ret;
      DWORD index = 0;
-     LPCTCH tempstr = NULL;
+-    LPCTCH tempstr = NULL;
 -   
++    LPBYTE tempstr = NULL;
 +
      ret = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
                         TEXT(REGISTRY_KEY), KEY_WOW64_32KEY,
