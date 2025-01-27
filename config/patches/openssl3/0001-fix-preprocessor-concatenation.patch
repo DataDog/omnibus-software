@@ -1,4 +1,4 @@
-From 5418b99172d0b55de9a42e8a36e87be239a37256 Mon Sep 17 00:00:00 2001
+From 0c5a3ac37e7fc4f01cf8b41dbdffa13d235b490e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Hugo=20Beauz=C3=A9e-Luyssen?= <hugo@beauzee.fr>
 Date: Mon, 27 Jan 2025 08:36:07 +0100
 Subject: [PATCH] crypto: fix preprocessor concatenation
@@ -25,7 +25,7 @@ index 87154645b0..ae439c668b 100644
  #endif
  
 diff --git a/crypto/defaults.c b/crypto/defaults.c
-index 908539cf31..166dcb47d7 100644
+index 908539cf31..d85f040214 100644
 --- a/crypto/defaults.c
 +++ b/crypto/defaults.c
 @@ -19,7 +19,7 @@
@@ -43,7 +43,7 @@ index 908539cf31..166dcb47d7 100644
      DWORD index = 0;
 -    LPCTCH tempstr = NULL;
 -   
-+    LPBYTE tempstr = NULL;
++    LPCTSTR tempstr = NULL;
 +
      ret = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
                         TEXT(REGISTRY_KEY), KEY_WOW64_32KEY,
