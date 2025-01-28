@@ -1,4 +1,4 @@
-From 0c5a3ac37e7fc4f01cf8b41dbdffa13d235b490e Mon Sep 17 00:00:00 2001
+From f39c0ccf0b8af918d16b8072cde116a4b33d32bb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Hugo=20Beauz=C3=A9e-Luyssen?= <hugo@beauzee.fr>
 Date: Mon, 27 Jan 2025 08:36:07 +0100
 Subject: [PATCH] crypto: fix preprocessor concatenation
@@ -7,9 +7,9 @@ String litteral don't need the '##' operator, which causes build
 failures:
 crypto/defaults.c:kepi:23: error: pasting ""SOFTWARE\\WOW6432Node\\OpenSSL"" and ""-"" does not give a valid preprocessing token
 ---
- crypto/cversion.c | 2 +-
- crypto/defaults.c | 8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ crypto/cversion.c |  2 +-
+ crypto/defaults.c | 10 +++++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/crypto/cversion.c b/crypto/cversion.c
 index 87154645b0..ae439c668b 100644
@@ -25,7 +25,7 @@ index 87154645b0..ae439c668b 100644
  #endif
  
 diff --git a/crypto/defaults.c b/crypto/defaults.c
-index 908539cf31..d85f040214 100644
+index 908539cf31..09ac5a8799 100644
 --- a/crypto/defaults.c
 +++ b/crypto/defaults.c
 @@ -19,7 +19,7 @@
@@ -48,7 +48,12 @@ index 908539cf31..d85f040214 100644
      ret = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
                         TEXT(REGISTRY_KEY), KEY_WOW64_32KEY,
                         KEY_QUERY_VALUE, &hkey);
-@@ -97,7 +97,7 @@ static char *get_windows_regdirs(char *dst, LPCTSTR valuename)
+@@ -93,11 +93,11 @@ static char *get_windows_regdirs(char *dst, LPCTSTR valuename)
+         goto out;
+ 
+     if (RegQueryValueEx(hkey, valuename,
+-                        NULL, &ktype, tempstr, &keysize) != ERROR_SUCCESS)
++                        NULL, &ktype, (LPBYTE)tempstr, &keysize) != ERROR_SUCCESS)
          goto out;
  
      if (!WideCharToMultiByte(CP_UTF8, 0, tempstr, -1, dst, keysize,
