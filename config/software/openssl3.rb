@@ -10,7 +10,7 @@
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
+# See the License for the specific language governing permissions andopenssl
 # limitations under the License.
 #
 
@@ -23,7 +23,7 @@ skip_transitive_dependency_licensing true
 dependency "zlib"
 dependency "cacerts"
 
-default_version "3.3.2"
+default_version "3.4.0"
 
 source url: "https://www.openssl.org/source/openssl-#{version}.tar.gz", extract: :lax_tar
 
@@ -37,10 +37,12 @@ version("3.0.14") { source sha256: "eeca035d4dd4e84fc25846d952da6297484afa0650a6
 version("3.3.0") { source sha256: "53e66b043322a606abf0087e7699a0e033a37fa13feb9742df35c3a33b18fb02" }
 version("3.3.1") { source sha256: "777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e" }
 version("3.3.2") { source sha256: "2e8a40b01979afe8be0bbfb3de5dc1c6709fedb46d6c89c10da114ab5fc3d281" }
+version("3.4.0") { source sha256: "e15dda82fe2fe8139dc2ac21a36d4ca01d5313c75f99f46c4e8a27709b7294bf" }
 
 relative_path "openssl-#{version}"
 
 build do
+  patch source: "0001-fix-preprocessor-concatenation.patch"
 
   env = with_standard_compiler_flags(with_embedded_path)
   if windows?
@@ -79,6 +81,11 @@ build do
 
   if windows?
     configure_args << "zlib-dynamic"
+    if ENV['AGENT_FLAVOR'] == "fips"
+      configure_args << '--openssldir="C:/Program Files/Datadog/Datadog Agent/embedded3/ssl"'
+      # Provide a context name for our configuration through the registry
+      configure_args << "-DOSSL_WINCTX=datadog-fips-agent"
+    end
   else
     configure_args << "zlib"
   end
