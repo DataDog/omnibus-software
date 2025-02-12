@@ -81,7 +81,7 @@ build do
 
   if windows?
     configure_args << "zlib-dynamic"
-    if ENV['AGENT_FLAVOR'] == "fips"
+    if ENV["AGENT_FLAVOR"] == "fips"
       configure_args << '--openssldir="C:/Program Files/Datadog/Datadog Agent/embedded3/ssl"'
       # Provide a context name for our configuration through the registry
       configure_args << "-DOSSL_WINCTX=datadog-fips-agent"
