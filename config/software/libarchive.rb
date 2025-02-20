@@ -19,10 +19,10 @@
 # https://github.com/berkshelf/api.berkshelf.com
 
 name "libarchive"
-default_version "3.1.2"
+default_version "3.7.7"
 
-source url: "https://www.libarchive.org/downloads/libarchive-#{version}.tar.gz",
-       sha256: "eb87eacd8fe49e8d90c8fdc189813023ccc319c5e752b01fb6ad0cc7b2c53d5e"
+source url: "https://www.libarchive.org/downloads/libarchive-#{version}.tar.xz",
+       sha256: "879acd83c3399c7caaee73fe5f7418e06087ab2aaf40af3e99b9e29beb29faee"
 
 relative_path "libarchive-#{version}"
 
